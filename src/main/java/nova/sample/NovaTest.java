@@ -1,7 +1,6 @@
 package nova.sample;
 
 import nova.core.block.Block;
-import nova.core.block.BlockBuilder;
 import nova.core.game.Game;
 import nova.core.loader.Loadable;
 import nova.core.loader.NovaMod;
@@ -17,10 +16,6 @@ public class NovaTest implements Loadable {
 
 	@Override
 	public void preInit() {
-		try {
-			blockTest = Game.instance.get().blockManager.registerBlock(new BlockBuilder<>(BlockTest.class));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		blockTest = Game.instance.get().blockManager.registerBlock(BlockTest.class);
 	}
 }

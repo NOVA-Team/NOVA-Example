@@ -11,10 +11,7 @@ import nova.core.util.transform.Vector3i;
  * @author Calclavia
  */
 public class BlockTest extends Block {
-	public BlockTest(BlockAccess access, Vector3i position) {
-		super(access, position);
-	}
-
+	
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
 		System.out.println("I'm being right clicked!");
