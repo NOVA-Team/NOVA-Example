@@ -1,10 +1,8 @@
 package nova.sample;
 
 import nova.core.block.Block;
-import nova.core.block.BlockAccess;
 import nova.core.entity.Entity;
 import nova.core.util.transform.Vector3d;
-import nova.core.util.transform.Vector3i;
 
 /**
  * Literarlly, this is a test block.
