@@ -5,7 +5,7 @@ import nova.core.entity.Entity;
 import nova.core.util.transform.Vector3d;
 
 /**
- * Literarlly, this is a test block.
+ * Literally, this is a test block.
  * @author Calclavia
  */
 public class BlockTest extends Block {
