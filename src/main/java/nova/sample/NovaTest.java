@@ -1,12 +1,15 @@
 package nova.sample;
 
 import nova.core.block.Block;
+import nova.core.block.BlockManager;
 import nova.core.game.Game;
 import nova.core.item.Item;
+import nova.core.item.ItemManager;
 import nova.core.loader.Loadable;
 import nova.core.loader.NovaMod;
 import nova.core.render.BlockTexture;
 import nova.core.render.ItemTexture;
+import nova.core.render.RenderManager;
 import nova.sample.block.BlockSimpleTest;
 import nova.sample.block.BlockStateTest;
 import nova.sample.item.ItemScrewdriver;
@@ -23,14 +26,24 @@ public class NovaTest implements Loadable {
 	public static BlockTexture steelTexture;
 	public static ItemTexture screwTexture;
 
+	public final BlockManager blockManager;
+	public final ItemManager itemManager;
+	public final RenderManager renderManager;
+	
+	public NovaTest(BlockManager blockManager, ItemManager itemManager, RenderManager renderManager) {
+		this.blockManager = blockManager;
+		this.itemManager = itemManager;
+		this.renderManager = renderManager;
+	}
+	
 	@Override
 	public void preInit() {
-		blockTest = Game.instance.get().blockManager.registerBlock(BlockSimpleTest.class);
-		blockStateTest = Game.instance.get().blockManager.registerBlock(BlockStateTest.class);
+		blockTest = blockManager.registerBlock(BlockSimpleTest.class);
+		blockStateTest = blockManager.registerBlock(BlockStateTest.class);
 
-		itemScrewdriver = Game.instance.get().itemManager.registerItem(ItemScrewdriver.class);
+		itemScrewdriver = itemManager.registerItem(ItemScrewdriver.class);
 
-		screwTexture = Game.instance.get().renderManager.registerTexture(new ItemTexture("screwdriver"));
-		steelTexture = Game.instance.get().renderManager.registerTexture(new BlockTexture("blockSteel"));
+		screwTexture = renderManager.registerTexture(new ItemTexture("screwdriver"));
+		steelTexture = renderManager.registerTexture(new BlockTexture("blockSteel"));
 	}
 }
