@@ -1,6 +1,7 @@
 package nova.sample;
 
 import nova.core.block.Block;
+import nova.core.block.components.Stateful;
 import nova.core.entity.Entity;
 import nova.core.network.Packet;
 import nova.core.network.PacketManager;
@@ -13,14 +14,14 @@ import nova.core.util.transform.Vector3d;
 import java.util.Optional;
 
 /**
- * Literally, this is a test block.
+ * This is a test block that has state.
  * @author Calclavia
  */
-public class BlockTest extends Block implements PacketReceiver, PacketSender {
+public class BlockStateTest extends Block implements Stateful, PacketReceiver, PacketSender {
 
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
-		System.out.println("Sending Packet: 1234");
+		System.out.println("Sending Packet: 2222");
 		PacketManager.instance.get().sync(this);
 		return true;
 	}
@@ -37,11 +38,16 @@ public class BlockTest extends Block implements PacketReceiver, PacketSender {
 
 	@Override
 	public void write(Packet packet) {
-		packet.writeInt(1234);
+		packet.writeInt(2222);
+	}
+
+	@Override
+	public boolean isValid() {
+		return true;
 	}
 
 	@Override
 	public String getID() {
-		return "test";
+		return "stateful";
 	}
 }
