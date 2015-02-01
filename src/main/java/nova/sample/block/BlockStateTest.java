@@ -1,4 +1,4 @@
-package nova.sample;
+package nova.sample.block;
 
 import nova.core.block.Block;
 import nova.core.block.components.Stateful;
@@ -10,6 +10,7 @@ import nova.core.network.PacketSender;
 import nova.core.render.Texture;
 import nova.core.util.Direction;
 import nova.core.util.transform.Vector3d;
+import nova.sample.NovaTest;
 
 import java.util.Optional;
 

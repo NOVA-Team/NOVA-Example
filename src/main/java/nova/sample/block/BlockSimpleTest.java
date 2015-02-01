@@ -1,4 +1,4 @@
-package nova.sample;
+package nova.sample.block;
 
 import nova.core.block.Block;
 import nova.core.entity.Entity;
@@ -9,6 +9,7 @@ import nova.core.network.PacketSender;
 import nova.core.render.Texture;
 import nova.core.util.Direction;
 import nova.core.util.transform.Vector3d;
+import nova.sample.NovaTest;
 
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ import java.util.Optional;
  * Literally, this is a test block.
  * @author Calclavia
  */
-public class BlockTest extends Block implements PacketReceiver, PacketSender {
+public class BlockSimpleTest extends Block implements PacketReceiver, PacketSender {
 
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
