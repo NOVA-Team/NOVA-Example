@@ -33,7 +33,6 @@ public class BlockStateTest extends Block implements Stateful, PacketReceiver, P
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
 		angle = (angle + Math.PI / 6) % (Math.PI * 2);
-		System.out.println("Sending Packet: " + this + " with " + angle);
 		PacketManager.instance.get().sync(this);
 		return true;
 	}
