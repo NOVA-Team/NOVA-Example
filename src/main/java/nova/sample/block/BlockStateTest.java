@@ -28,11 +28,11 @@ public class BlockStateTest extends Block implements Stateful, PacketReceiver, P
 	 */
 	@Stored
 	@Sync
-	private int angle;
+	private double angle;
 
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
-		angle += 10;
+		angle = (angle + Math.PI / 6) % (Math.PI * 2);
 		System.out.println("Sending Packet: " + this + " with " + angle);
 		PacketManager.instance.get().sync(this);
 		return true;
@@ -57,5 +57,10 @@ public class BlockStateTest extends Block implements Stateful, PacketReceiver, P
 	@Override
 	public String getID() {
 		return "stateful";
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
 	}
 }
