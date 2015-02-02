@@ -3,12 +3,15 @@ package nova.sample.block;
 import nova.core.block.Block;
 import nova.core.block.components.Stateful;
 import nova.core.entity.Entity;
-import nova.core.network.Packet;
 import nova.core.network.PacketManager;
 import nova.core.network.PacketReceiver;
 import nova.core.network.PacketSender;
+import nova.core.network.Sync;
+import nova.core.render.model.Model;
 import nova.core.render.texture.Texture;
 import nova.core.util.Direction;
+import nova.core.util.Stored;
+import nova.core.util.transform.Quaternion;
 import nova.core.util.transform.Vector3d;
 import nova.sample.NovaTest;
 
@@ -20,9 +23,17 @@ import java.util.Optional;
  */
 public class BlockStateTest extends Block implements Stateful, PacketReceiver, PacketSender {
 
+	/**
+	 * Angle to rotate around
+	 */
+	@Stored
+	@Sync
+	private int angle;
+
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
-		System.out.println("Sending Packet: 2222");
+		angle += 10;
+		System.out.println("Sending Packet: " + this + " with " + angle);
 		PacketManager.instance.get().sync(this);
 		return true;
 	}
@@ -33,13 +44,9 @@ public class BlockStateTest extends Block implements Stateful, PacketReceiver, P
 	}
 
 	@Override
-	public void read(Packet packet) {
-		System.out.println("Received packet: " + packet.readInt());
-	}
-
-	@Override
-	public void write(Packet packet) {
-		packet.writeInt(2222);
+	public void renderWorld(Model model) {
+		super.renderWorld(model);
+		model.rotation = Quaternion.fromEuler(angle, 0, 0);
 	}
 
 	@Override
