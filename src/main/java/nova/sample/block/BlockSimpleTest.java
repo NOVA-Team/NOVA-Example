@@ -43,6 +43,6 @@ public class BlockSimpleTest extends Block implements PacketReceiver, PacketSend
 
 	@Override
 	public String getID() {
-		return "test";
+		return "simple";
 	}
 }

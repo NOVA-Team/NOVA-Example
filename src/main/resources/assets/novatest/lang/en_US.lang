@@ -1,0 +1,9 @@
+# NOVA Test Language File
+# @author Calclavia
+
+# Blocks
+tile.stateful.name=Stateful Block
+tile.simple.name=Simple Block
+
+# Items
+item.screwdriver.name=Screwdriver
