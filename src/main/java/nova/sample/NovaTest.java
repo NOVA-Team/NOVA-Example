@@ -2,7 +2,6 @@ package nova.sample;
 
 import nova.core.block.Block;
 import nova.core.block.BlockManager;
-import nova.core.game.Game;
 import nova.core.item.Item;
 import nova.core.item.ItemManager;
 import nova.core.loader.Loadable;
@@ -44,6 +43,6 @@ public class NovaTest implements Loadable {
 		itemScrewdriver = itemManager.registerItem(ItemScrewdriver.class);
 
 		screwTexture = renderManager.registerTexture(new ItemTexture("novatest:screwdriver"));
-		steelTexture = renderManager.registerTexture(new BlockTexture("novatest:blockSteel"));
+		steelTexture = renderManager.registerTexture(new BlockTexture("blockSteel"));
 	}
 }
