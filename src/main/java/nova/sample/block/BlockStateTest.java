@@ -7,7 +7,7 @@ import nova.core.network.Packet;
 import nova.core.network.PacketManager;
 import nova.core.network.PacketReceiver;
 import nova.core.network.PacketSender;
-import nova.core.render.Texture;
+import nova.core.render.texture.Texture;
 import nova.core.util.Direction;
 import nova.core.util.transform.Vector3d;
 import nova.sample.NovaTest;

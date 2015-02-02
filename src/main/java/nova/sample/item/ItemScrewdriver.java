@@ -1,7 +1,7 @@
 package nova.sample.item;
 
 import nova.core.item.Item;
-import nova.core.render.ItemTexture;
+import nova.core.render.texture.ItemTexture;
 import nova.sample.NovaTest;
 
 import java.util.Optional;
