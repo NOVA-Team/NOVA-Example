@@ -17,8 +17,10 @@ import nova.sample.item.ItemScrewdriver;
  * A test Nova Mod
  * @author Calclavia
  */
-@NovaMod(id = "novatest", name = "Nova Test", version = "0.0.1", novaVersion = "0.0.1")
+@NovaMod(id = NovaTest.id, name = "Nova Test", version = "0.0.1", novaVersion = "0.0.1")
 public class NovaTest implements Loadable {
+
+	public static final String id = "novatest";
 
 	public static Block blockTest, blockStateTest;
 	public static Item itemScrewdriver;
@@ -28,13 +30,13 @@ public class NovaTest implements Loadable {
 	public final BlockManager blockManager;
 	public final ItemManager itemManager;
 	public final RenderManager renderManager;
-	
+
 	public NovaTest(BlockManager blockManager, ItemManager itemManager, RenderManager renderManager) {
 		this.blockManager = blockManager;
 		this.itemManager = itemManager;
 		this.renderManager = renderManager;
 	}
-	
+
 	@Override
 	public void preInit() {
 		blockTest = blockManager.registerBlock(BlockSimpleTest.class);
@@ -42,7 +44,7 @@ public class NovaTest implements Loadable {
 
 		itemScrewdriver = itemManager.registerItem(ItemScrewdriver.class);
 
-		screwTexture = renderManager.registerTexture(new ItemTexture("novatest:screwdriver"));
-		steelTexture = renderManager.registerTexture(new BlockTexture("blockSteel"));
+		screwTexture = renderManager.registerTexture(new ItemTexture(id, "screwdriver"));
+		steelTexture = renderManager.registerTexture(new BlockTexture(id, "blockSteel"));
 	}
 }
