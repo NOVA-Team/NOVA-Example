@@ -43,7 +43,7 @@ public class NovaTest implements Loadable {
 
 		itemScrewdriver = itemManager.registerItem(ItemScrewdriver.class);
 
-		screwTexture = renderManager.registerTexture(new ItemTexture("screwdriver"));
-		steelTexture = renderManager.registerTexture(new BlockTexture("blockSteel"));
+		screwTexture = renderManager.registerTexture(new ItemTexture("novatest:screwdriver"));
+		steelTexture = renderManager.registerTexture(new BlockTexture("novatest:blockSteel"));
 	}
 }
