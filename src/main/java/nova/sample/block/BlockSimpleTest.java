@@ -15,6 +15,7 @@ import java.util.Optional;
 
 /**
  * Literally, this is a test block.
+ *
  * @author Calclavia
  */
 public class BlockSimpleTest extends Block implements PacketReceiver, PacketSender {
@@ -32,12 +33,12 @@ public class BlockSimpleTest extends Block implements PacketReceiver, PacketSend
 	}
 
 	@Override
-	public void read(Packet packet) {
+	public void read(int id, Packet packet) {
 		System.out.println("Received packet: " + packet.readInt());
 	}
 
 	@Override
-	public void write(Packet packet) {
+	public void write(int id, Packet packet) {
 		packet.writeInt(1234);
 	}
 
