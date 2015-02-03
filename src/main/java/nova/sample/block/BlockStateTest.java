@@ -53,8 +53,10 @@ public class BlockStateTest extends Block implements Storable, Stateful, PacketR
 
 	@Override
 	public void load() {
-		System.out.println("BlockState Load: " + this + " : " + angle);
-		NetworkManager.instance.get().sync(this);
+		if (NetworkManager.instance.get().isServer()) {
+			System.out.println("BlockState Load: " + this + " : " + angle);
+			NetworkManager.instance.get().sync(this);
+		}
 	}
 
 	@Override
