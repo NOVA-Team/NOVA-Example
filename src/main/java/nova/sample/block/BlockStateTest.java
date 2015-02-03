@@ -3,6 +3,7 @@ package nova.sample.block;
 import nova.core.block.Block;
 import nova.core.block.components.Stateful;
 import nova.core.entity.Entity;
+import nova.core.network.Packet;
 import nova.core.network.PacketManager;
 import nova.core.network.PacketReceiver;
 import nova.core.network.PacketSender;
@@ -32,7 +33,7 @@ public class BlockStateTest extends Block implements Stateful, PacketReceiver, P
 
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
-		angle = (angle + Math.PI / 6) % (Math.PI * 2);
+		angle = (angle + Math.PI / 12) % (Math.PI * 2);
 		PacketManager.instance.get().sync(this);
 		return true;
 	}
@@ -43,9 +44,15 @@ public class BlockStateTest extends Block implements Stateful, PacketReceiver, P
 	}
 
 	@Override
-	public void renderWorld(Model model) {
-		super.renderWorld(model);
+	public void renderStatic(Model model) {
+		super.renderStatic(model);
 		model.rotation = Quaternion.fromEuler(angle, 0, 0);
+	}
+
+	@Override
+	public void read(Packet packet) {
+		PacketReceiver.super.read(packet);
+		getWorld().markStaticRender(getPosition());
 	}
 
 	@Override
