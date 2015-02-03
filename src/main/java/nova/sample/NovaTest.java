@@ -11,10 +11,12 @@ import nova.core.loader.NovaMod;
 import nova.core.recipes.crafting.ItemIngredient;
 import nova.core.recipes.crafting.ShapedCraftingRecipe;
 import nova.core.render.RenderManager;
+import nova.core.render.model.ModelProvider;
+import nova.core.render.model.TechneModel;
 import nova.core.render.texture.BlockTexture;
 import nova.core.render.texture.ItemTexture;
+import nova.sample.block.BlockGrinder;
 import nova.sample.block.BlockSimpleTest;
-import nova.sample.block.BlockStateTest;
 import nova.sample.item.ItemScrewdriver;
 
 /**
@@ -26,10 +28,12 @@ public class NovaTest implements Loadable {
 
 	public static final String id = "novatest";
 
-	public static Block blockTest, blockStateTest;
+	public static Block blockTest, blockGrinder;
 	public static Item itemScrewdriver;
 	public static BlockTexture steelTexture;
 	public static ItemTexture screwTexture;
+	public static BlockTexture grinderTexture;
+	public static ModelProvider grinderModel;
 
 	public final BlockManager blockManager;
 	public final ItemManager itemManager;
@@ -44,12 +48,14 @@ public class NovaTest implements Loadable {
 	@Override
 	public void preInit() {
 		blockTest = blockManager.registerBlock(BlockSimpleTest.class);
-		blockStateTest = blockManager.registerBlock(BlockStateTest.class);
+		blockGrinder = blockManager.registerBlock(BlockGrinder.class);
 
 		itemScrewdriver = itemManager.registerItem(ItemScrewdriver.class);
 
 		screwTexture = renderManager.registerTexture(new ItemTexture(id, "screwdriver"));
 		steelTexture = renderManager.registerTexture(new BlockTexture(id, "blockSteel"));
+		grinderTexture = renderManager.registerTexture(new BlockTexture(id, "grinder"));
+		grinderModel = renderManager.registerModel(new TechneModel(id, "grinder"));
 
         // try to add a recipe
         ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick");

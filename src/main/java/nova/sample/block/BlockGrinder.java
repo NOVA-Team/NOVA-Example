@@ -9,22 +9,16 @@ import nova.core.network.PacketReceiver;
 import nova.core.network.PacketSender;
 import nova.core.network.Sync;
 import nova.core.render.model.Model;
-import nova.core.render.texture.Texture;
-import nova.core.util.Direction;
 import nova.core.util.components.Storable;
 import nova.core.util.components.Stored;
-import nova.core.util.transform.Quaternion;
 import nova.core.util.transform.Vector3d;
 import nova.sample.NovaTest;
 
-import java.util.Optional;
-
 /**
  * This is a test block that has state.
- *
  * @author Calclavia
  */
-public class BlockStateTest extends Block implements Storable, Stateful, PacketReceiver, PacketSender {
+public class BlockGrinder extends Block implements Storable, Stateful, PacketReceiver, PacketSender {
 
 	/**
 	 * Angle to rotate around
@@ -43,14 +37,11 @@ public class BlockStateTest extends Block implements Storable, Stateful, PacketR
 	}
 
 	@Override
-	public Optional<Texture> getTexture(Direction side) {
-		return Optional.of(NovaTest.steelTexture);
-	}
-
-	@Override
 	public void renderStatic(Model model) {
-		super.renderStatic(model);
-		model.rotation = Quaternion.fromEuler(angle, 0, 0);
+		Model grinderModel = NovaTest.grinderModel.getModel();
+		model.scale = new Vector3d(1 / 16, 1 / 16, 1 / 16);
+		model.children.add(grinderModel);
+		model.bind(NovaTest.steelTexture);
 	}
 
 	@Override

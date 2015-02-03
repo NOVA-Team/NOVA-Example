@@ -17,7 +17,7 @@ buildscript {
 	dependencies {
 		classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
 //		classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.0'
-//		classpath 'us.phildop:gradle-sublimetext-plugin:0.5.3'
+		classpath 'us.phildop:gradle-sublimetext-plugin:0.5.3'
 	}
 }
 
@@ -54,9 +54,9 @@ repositories {
 
 dependencies {
     // The production code uses the SLF4J logging API at compile time
-	compile group: "nova.core", name: "NovaCore", version:"$nova_version", changing: true
+	compile group: "nova.core", name: "NovaCore", version: nova_version, changing: true
 
-	runtime "nova.wrapper.mc1710:NovaWrapper-MC1.7.10:0.1-SNAPSHOT"
+	runtime group: "nova.wrapper.mc1710", name: "NovaWrapper-MC1.7.10", version: wrapper_version, changing: true
 }
 
 runClient {
