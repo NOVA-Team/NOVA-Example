@@ -2,10 +2,14 @@ package nova.sample;
 
 import nova.core.block.Block;
 import nova.core.block.BlockManager;
+import nova.core.game.Game;
 import nova.core.item.Item;
 import nova.core.item.ItemManager;
+import nova.core.item.ItemStack;
 import nova.core.loader.Loadable;
 import nova.core.loader.NovaMod;
+import nova.core.recipes.crafting.ItemIngredient;
+import nova.core.recipes.crafting.ShapedCraftingRecipe;
 import nova.core.render.RenderManager;
 import nova.core.render.texture.BlockTexture;
 import nova.core.render.texture.ItemTexture;
@@ -46,5 +50,11 @@ public class NovaTest implements Loadable {
 
 		screwTexture = renderManager.registerTexture(new ItemTexture(id, "screwdriver"));
 		steelTexture = renderManager.registerTexture(new BlockTexture(id, "blockSteel"));
-	}
+
+        // try to add a recipe
+        ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick");
+        ItemIngredient ingotIngredient = ItemIngredient.forItem("minecraft:iron_ingot");
+        Game.instance.get().recipeManager.addRecipe(new ShapedCraftingRecipe(new ItemStack(itemScrewdriver, 1), "A- B", ingotIngredient, stickIngredient));
+        System.out.println("Added recipe for the screwdriver");
+    }
 }
