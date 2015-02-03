@@ -35,8 +35,10 @@ public class BlockStateTest extends Block implements Storable, Stateful, PacketR
 
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
-		angle = (angle + Math.PI / 12) % (Math.PI * 2);
-		NetworkManager.instance.get().sync(this);
+		if (NetworkManager.instance.get().isServer()) {
+			angle = (angle + Math.PI / 12) % (Math.PI * 2);
+			NetworkManager.instance.get().sync(this);
+		}
 		return true;
 	}
 
@@ -49,19 +51,6 @@ public class BlockStateTest extends Block implements Storable, Stateful, PacketR
 	public void renderStatic(Model model) {
 		super.renderStatic(model);
 		model.rotation = Quaternion.fromEuler(angle, 0, 0);
-	}
-
-	@Override
-	public void load() {
-		if (NetworkManager.instance.get().isServer()) {
-			System.out.println("BlockState Load: " + this + " : " + angle);
-			NetworkManager.instance.get().sync(this);
-		}
-	}
-
-	@Override
-	public void unload() {
-		System.out.println("BlockState Unload");
 	}
 
 	@Override
