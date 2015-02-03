@@ -63,8 +63,8 @@ public class BlockStateTest extends Block implements Storable, Stateful, PacketR
 	}
 
 	@Override
-	public void read(Packet packet) {
-		PacketReceiver.super.read(packet);
+	public void read(int id, Packet packet) {
+		PacketReceiver.super.read(id, packet);
 		getWorld().markStaticRender(getPosition());
 	}
 
