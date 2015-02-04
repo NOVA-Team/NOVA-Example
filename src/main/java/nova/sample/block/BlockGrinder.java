@@ -39,8 +39,6 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketRec
 	@Override
 	public void renderStatic(Model model) {
 		Model grinderModel = NovaTest.grinderModel.getModel();
-		grinderModel.children.removeIf(m -> !m.name.equals("platformBottom"));
-		model.scale = new Vector3d(1 / 16, 1 / 16, 1 / 16);
 		model.children.add(grinderModel);
 		model.bind(NovaTest.steelTexture);
 	}
