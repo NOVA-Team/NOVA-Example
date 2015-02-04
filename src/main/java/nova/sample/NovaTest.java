@@ -30,6 +30,9 @@ public class NovaTest implements Loadable {
 
 	public static Block blockTest, blockGrinder;
 	public static Item itemScrewdriver;
+    public static Item itemBlockTest;
+    public static Item itemBlockGrinder;
+
 	public static BlockTexture steelTexture;
 	public static ItemTexture screwTexture;
 	public static BlockTexture grinderTexture;
@@ -51,6 +54,8 @@ public class NovaTest implements Loadable {
 		blockGrinder = blockManager.registerBlock(BlockGrinder.class);
 
 		itemScrewdriver = itemManager.registerItem(ItemScrewdriver.class);
+        itemBlockTest = itemManager.getItemFromBlock(blockTest);
+        itemBlockGrinder = itemManager.getItemFromBlock(blockGrinder);
 
 		screwTexture = renderManager.registerTexture(new ItemTexture(id, "screwdriver"));
 		steelTexture = renderManager.registerTexture(new BlockTexture(id, "blockSteel"));
@@ -60,7 +65,8 @@ public class NovaTest implements Loadable {
         // try to add a recipe
         ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick");
         ItemIngredient ingotIngredient = ItemIngredient.forItem("minecraft:iron_ingot");
+        ItemIngredient screwdriverIngredient = ItemIngredient.forItem("screwdriver");
         Game.instance.get().recipeManager.addRecipe(new ShapedCraftingRecipe(new ItemStack(itemScrewdriver, 1), "A- B", ingotIngredient, stickIngredient));
-        System.out.println("Added recipe for the screwdriver");
+        Game.instance.get().recipeManager.addRecipe(new ShapedCraftingRecipe(new ItemStack(itemBlockTest, 1), "AAA-ABA-AAA", ingotIngredient, screwdriverIngredient));
     }
 }
