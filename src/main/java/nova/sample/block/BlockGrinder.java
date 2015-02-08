@@ -47,7 +47,7 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketRec
 	@Override
 	public void read(int id, Packet packet) {
 		PacketReceiver.super.read(id, packet);
-		getWorld().markStaticRender(getPosition());
+		world().markStaticRender(position());
 	}
 
 	@Override
