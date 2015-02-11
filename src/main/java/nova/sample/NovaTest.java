@@ -3,11 +3,17 @@ package nova.sample;
 import nova.core.block.Block;
 import nova.core.block.BlockManager;
 import nova.core.game.Game;
+import nova.core.gui.ComponentEvent.ActionEvent;
+import nova.core.gui.GuiEvent.BindEvent;
+import nova.core.gui.Gui;
+import nova.core.gui.GuiEvent;
+import nova.core.gui.components.Button;
 import nova.core.item.Item;
 import nova.core.item.ItemManager;
 import nova.core.item.ItemStack;
 import nova.core.loader.Loadable;
 import nova.core.loader.NovaMod;
+import nova.core.network.NetworkManager;
 import nova.core.recipes.crafting.ItemIngredient;
 import nova.core.recipes.crafting.ShapedCraftingRecipe;
 import nova.core.render.RenderManager;
@@ -69,5 +75,17 @@ public class NovaTest implements Loadable {
         ItemIngredient screwdriverIngredient = ItemIngredient.forItem("screwdriver");
         Game.instance.get().recipeManager.addRecipe(new ShapedCraftingRecipe(new ItemStack(itemScrewdriver, 1), "A- B", ingotIngredient, stickIngredient));
         Game.instance.get().recipeManager.addRecipe(new ShapedCraftingRecipe(new ItemStack(itemBlockTest, 1), "AAA-ABA-AAA", ingotIngredient, screwdriverIngredient));
+        
+        initializeGUI();
     }
+	
+	public void initializeGUI() {
+		Gui testGUI = new Gui("testgui").addElement(new Button("testbutton", "I am a test").registerEventListener((event) -> {
+			System.out.println("Test button pressed! " + NetworkManager.instance.get().getSide());
+		}, ActionEvent.class)).registerListener((event) -> {
+			System.out.println("Test GUI initialized! " + event.constraints.player.getDisplayName() + " " + event.constraints.position);
+		}, BindEvent.class);
+		
+		Game.instance.get().guiFactory.get().registerGui(testGUI, id);
+	}
 }
