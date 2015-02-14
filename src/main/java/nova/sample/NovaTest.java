@@ -4,10 +4,11 @@ import nova.core.block.Block;
 import nova.core.block.BlockManager;
 import nova.core.game.Game;
 import nova.core.gui.ComponentEvent.ActionEvent;
-import nova.core.gui.GuiEvent.BindEvent;
 import nova.core.gui.Gui;
-import nova.core.gui.GuiEvent;
+import nova.core.gui.GuiEvent.BindEvent;
+import nova.core.gui.GuiEvent.UnBindEvent;
 import nova.core.gui.components.Button;
+import nova.core.gui.layout.Anchor;
 import nova.core.item.Item;
 import nova.core.item.ItemManager;
 import nova.core.item.ItemStack;
@@ -80,11 +81,21 @@ public class NovaTest implements Loadable {
     }
 	
 	public void initializeGUI() {
-		Gui testGUI = new Gui("testgui").addElement(new Button("testbutton", "I am a test").registerEventListener((event) -> {
-			System.out.println("Test button pressed! " + NetworkManager.instance.get().getSide());
-		}, ActionEvent.class)).registerListener((event) -> {
-			System.out.println("Test GUI initialized! " + event.constraints.player.getDisplayName() + " " + event.constraints.position);
-		}, BindEvent.class);
+		Gui testGUI = new Gui("testgui")
+			.addElement(new Button("testbutton", "I am a test")
+				.registerEventListener((event) -> {
+					System.out.println("Test button pressed! " + NetworkManager.instance.get().getSide());
+				}, ActionEvent.class), Anchor.WEST)
+			.addElement(new Button("testbutton2", "I am another test button"), Anchor.EAST)
+			.addElement(new Button("testbutton3", "I am a centered test button"))
+			
+			.registerListener((event) -> {
+				System.out.println("Test GUI initialized! " + event.constraints.player.getDisplayName() + " " + event.constraints.position);
+			}, BindEvent.class)
+			
+			.registerListener((event) -> {
+				System.out.println("Test GUI closed!");
+			}, UnBindEvent.class);
 		
 		Game.instance.get().guiFactory.get().registerGui(testGUI, id);
 	}
