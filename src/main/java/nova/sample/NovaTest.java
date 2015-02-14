@@ -90,7 +90,7 @@ public class NovaTest implements Loadable {
 			.addElement(new Button("testbutton3", "I am a centered test button"))
 			
 			.registerListener((event) -> {
-				System.out.println("Test GUI initialized! " + event.constraints.player.getDisplayName() + " " + event.constraints.position);
+				System.out.println("Test GUI initialized! " + event.player.getDisplayName() + " " + event.position);
 			}, BindEvent.class)
 			
 			.registerListener((event) -> {
