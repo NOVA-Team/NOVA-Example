@@ -82,12 +82,16 @@ public class NovaTest implements Loadable {
 	
 	public void initializeGUI() {
 		Gui testGUI = new Gui("testgui")
-			.addElement(new Button("testbutton", "I am a test")
+			.addElement(new Button("testbutton2", "I'm EAST")
+				.setMaximumSize(Integer.MAX_VALUE, 120)
+				
 				.registerEventListener((event) -> {
 					System.out.println("Test button pressed! " + NetworkManager.instance.get().getSide());
-				}, ActionEvent.class), Anchor.WEST)
-			.addElement(new Button("testbutton2", "I am another test button"), Anchor.EAST)
-			.addElement(new Button("testbutton3", "I am a centered test button"))
+				}, ActionEvent.class), Anchor.EAST)
+				
+			.addElement(new Button("testbutton3", "I'm CENTER"))
+			.addElement(new Button("testbutton4", "I'm NORTH"), Anchor.NORTH)
+			.addElement(new Button("testbutton5", "I'm SOUTH"), Anchor.SOUTH)
 			
 			.registerListener((event) -> {
 				System.out.println("Test GUI initialized! " + event.player.getDisplayName() + " " + event.position);
