@@ -56,10 +56,10 @@ public class NovaTest implements Loadable {
 
 	@Override
 	public void preInit() {
-		blockTest = blockManager.registerBlock(BlockSimpleTest.class);
-		blockGrinder = blockManager.registerBlock(BlockGrinder.class);
+		blockTest = blockManager.register(BlockSimpleTest.class);
+		blockGrinder = blockManager.register(BlockGrinder.class);
 
-		itemScrewdriver = itemManager.registerItem(ItemScrewdriver.class);
+		itemScrewdriver = itemManager.register(ItemScrewdriver.class);
 		itemBlockTest = itemManager.getItemFromBlock(blockTest);
 		itemBlockGrinder = itemManager.getItemFromBlock(blockGrinder);
 
