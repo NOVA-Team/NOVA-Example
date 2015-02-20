@@ -9,6 +9,9 @@ import nova.core.gui.GuiEvent.BindEvent;
 import nova.core.gui.GuiEvent.UnBindEvent;
 import nova.core.gui.components.Button;
 import nova.core.gui.layout.Anchor;
+import nova.core.gui.render.FormattedText;
+import nova.core.gui.render.FormattedText.TextFormat;
+import nova.core.gui.render.Graphics;
 import nova.core.item.Item;
 import nova.core.item.ItemManager;
 import nova.core.loader.Loadable;
@@ -16,6 +19,7 @@ import nova.core.loader.NovaMod;
 import nova.core.network.NetworkManager;
 import nova.core.recipes.crafting.ItemIngredient;
 import nova.core.recipes.crafting.ShapedCraftingRecipe;
+import nova.core.render.Color;
 import nova.core.render.RenderManager;
 import nova.core.render.model.ModelProvider;
 import nova.core.render.model.TechneModel;
@@ -80,26 +84,50 @@ public class NovaTest implements Loadable {
 	}
 
 	public void initializeGUI() {
-		Gui testGUI = new Gui("testgui")
-			.addElement(new Button("testbutton2", "I'm EAST")
-				.setMaximumSize(Integer.MAX_VALUE, 120)
+		Gui testGUI = new Gui("testgui") {{
+				addElement(new Button("testbutton2", "I'm EAST")
+					.setMaximumSize(Integer.MAX_VALUE, 120)
+	
+					.registerEventListener((event) -> {
+						System.out.println("Test button pressed! " + NetworkManager.instance.get().getSide());
+					}, ActionEvent.class), Anchor.EAST);
+	
+				addElement(new Button("testbutton3", "I'm CENTER"));
+				addElement(new Button("testbutton4", "I'm NORTH"), Anchor.NORTH);
+				addElement(new Button("testbutton5", "I'm SOUTH"), Anchor.SOUTH);
+	
+				registerListener((event) -> {
+					System.out.println("Test GUI initialized! " + event.player.getDisplayName() + " " + event.position);
+				}, BindEvent.class);
+	
+				registerListener((event) -> {
+					System.out.println("Test GUI closed!");
+				}, UnBindEvent.class);
+			}
 
-				.registerEventListener((event) -> {
-					System.out.println("Test button pressed! " + NetworkManager.instance.get().getSide());
-				}, ActionEvent.class), Anchor.EAST)
-
-			.addElement(new Button("testbutton3", "I'm CENTER"))
-			.addElement(new Button("testbutton4", "I'm NORTH"), Anchor.NORTH)
-			.addElement(new Button("testbutton5", "I'm SOUTH"), Anchor.SOUTH)
-
-			.registerListener((event) -> {
-				System.out.println("Test GUI initialized! " + event.player.getDisplayName() + " " + event.position);
-			}, BindEvent.class)
-
-			.registerListener((event) -> {
-				System.out.println("Test GUI closed!");
-			}, UnBindEvent.class);
-
+			@Override
+			public void render(int mouseX, int mouseY, Graphics graphics) {
+				
+				FormattedText text = new FormattedText("Let's draw", new TextFormat((format) -> {
+					format.shadow = true;
+					format.bold = true;
+					format.underline = true;
+					format.color = Color.pink;
+				}))
+				.add(" some stuff", (format) -> {
+					format.italic = true;
+					format.color = Color.red;
+				})
+				.add(" on here!", (format) -> {
+					format.color = Color.cyan;
+					format.underline = false;
+					format.strikethrough = true;
+				});
+				
+				graphics.drawString(100, 100, text);
+			}
+		};
+		
 		Game.instance.get().guiFactory.get().registerGui(testGUI, id);
 	}
 }
