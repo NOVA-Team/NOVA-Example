@@ -6,12 +6,12 @@ import nova.core.game.Game;
 import nova.core.gui.ComponentEvent.ActionEvent;
 import nova.core.gui.Gui;
 import nova.core.gui.GuiEvent.BindEvent;
+import nova.core.gui.GuiEvent.RenderEvent;
 import nova.core.gui.GuiEvent.UnBindEvent;
 import nova.core.gui.components.Button;
 import nova.core.gui.layout.Anchor;
 import nova.core.gui.render.FormattedText;
 import nova.core.gui.render.FormattedText.TextFormat;
-import nova.core.gui.render.Graphics;
 import nova.core.item.Item;
 import nova.core.item.ItemManager;
 import nova.core.loader.Loadable;
@@ -84,30 +84,27 @@ public class NovaTest implements Loadable {
 	}
 
 	public void initializeGUI() {
-		Gui testGUI = new Gui("testgui") {{
-				addElement(new Button("testbutton2", "I'm EAST")
-					.setMaximumSize(Integer.MAX_VALUE, 120)
-	
-					.registerEventListener((event) -> {
-						System.out.println("Test button pressed! " + NetworkManager.instance.get().getSide());
-					}, ActionEvent.class), Anchor.EAST);
-	
-				addElement(new Button("testbutton3", "I'm CENTER"));
-				addElement(new Button("testbutton4", "I'm NORTH"), Anchor.NORTH);
-				addElement(new Button("testbutton5", "I'm SOUTH"), Anchor.SOUTH);
-	
-				registerListener((event) -> {
-					System.out.println("Test GUI initialized! " + event.player.getDisplayName() + " " + event.position);
-				}, BindEvent.class);
-	
-				registerListener((event) -> {
-					System.out.println("Test GUI closed!");
-				}, UnBindEvent.class);
-			}
+		Gui testGUI = new Gui("testgui")
+			.addElement(new Button("testbutton2", "I'm EAST")
+				.setMaximumSize(Integer.MAX_VALUE, 120)
 
-			@Override
-			public void render(int mouseX, int mouseY, Graphics graphics) {
-				
+				.registerEventListener((event) -> {
+					System.out.println("Test button pressed! " + NetworkManager.instance.get().getSide());
+				}, ActionEvent.class), Anchor.EAST)
+
+			.addElement(new Button("testbutton3", "I'm CENTER"))
+			.addElement(new Button("testbutton4", "I'm NORTH"), Anchor.NORTH)
+			.addElement(new Button("testbutton5", "I'm SOUTH"), Anchor.SOUTH)
+
+			.registerListener((event) -> {
+				System.out.println("Test GUI initialized! " + event.player.getDisplayName() + " " + event.position);
+			}, BindEvent.class)
+
+			.registerListener((event) -> {
+				System.out.println("Test GUI closed!");
+			}, UnBindEvent.class)
+		
+			.registerListener((event) -> {	
 				FormattedText text = new FormattedText("Let's draw", new TextFormat((format) -> {
 					format.shadow = true;
 					format.bold = true;
@@ -124,9 +121,8 @@ public class NovaTest implements Loadable {
 					format.strikethrough = true;
 				});
 				
-				graphics.drawString(100, 100, text);
-			}
-		};
+				event.graphics.drawString(100, 100, text);
+			}, RenderEvent.class);
 		
 		Game.instance.get().guiFactory.get().registerGui(testGUI, id);
 	}
