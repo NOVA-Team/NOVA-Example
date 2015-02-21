@@ -6,9 +6,12 @@ import nova.core.game.Game;
 import nova.core.gui.ComponentEvent.ActionEvent;
 import nova.core.gui.Gui;
 import nova.core.gui.GuiEvent.BindEvent;
+import nova.core.gui.GuiEvent.RenderEvent;
 import nova.core.gui.GuiEvent.UnBindEvent;
 import nova.core.gui.components.Button;
 import nova.core.gui.layout.Anchor;
+import nova.core.gui.render.FormattedText;
+import nova.core.gui.render.FormattedText.TextFormat;
 import nova.core.item.Item;
 import nova.core.item.ItemManager;
 import nova.core.loader.Loadable;
@@ -16,6 +19,7 @@ import nova.core.loader.NovaMod;
 import nova.core.network.NetworkManager;
 import nova.core.recipes.crafting.ItemIngredient;
 import nova.core.recipes.crafting.ShapedCraftingRecipe;
+import nova.core.render.Color;
 import nova.core.render.RenderManager;
 import nova.core.render.model.ModelProvider;
 import nova.core.render.model.TechneModel;
@@ -98,8 +102,28 @@ public class NovaTest implements Loadable {
 
 			.registerListener((event) -> {
 				System.out.println("Test GUI closed!");
-			}, UnBindEvent.class);
-
+			}, UnBindEvent.class)
+		
+			.registerListener((event) -> {	
+				FormattedText text = new FormattedText("Let's draw", new TextFormat((format) -> {
+					format.shadow = true;
+					format.bold = true;
+					format.underline = true;
+					format.color = Color.pink;
+				}))
+				.add(" some stuff", (format) -> {
+					format.italic = true;
+					format.color = Color.red;
+				})
+				.add(" on here!", (format) -> {
+					format.color = Color.cyan;
+					format.underline = false;
+					format.strikethrough = true;
+				});
+				
+				event.graphics.drawString(100, 100, text);
+			}, RenderEvent.class);
+		
 		Game.instance.get().guiFactory.get().registerGui(testGUI, id);
 	}
 }
