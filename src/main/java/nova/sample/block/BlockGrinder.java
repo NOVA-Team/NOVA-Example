@@ -3,6 +3,7 @@ package nova.sample.block;
 import nova.core.block.Block;
 import nova.core.block.components.Stateful;
 import nova.core.entity.Entity;
+import nova.core.game.Game;
 import nova.core.network.NetworkManager;
 import nova.core.network.Packet;
 import nova.core.network.PacketReceiver;
@@ -29,9 +30,9 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketRec
 
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
-		if (NetworkManager.instance.get().isServer()) {
+		if (Game.instance.get().networkManager.isServer()) {
 			angle = (angle + Math.PI / 12) % (Math.PI * 2);
-			NetworkManager.instance.get().sync(this);
+			Game.instance.get().networkManager.sync(this);
 		}
 		return true;
 	}

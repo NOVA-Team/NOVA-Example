@@ -89,7 +89,7 @@ public class NovaTest implements Loadable {
 				.setMaximumSize(Integer.MAX_VALUE, 120)
 
 				.registerEventListener((event) -> {
-					System.out.println("Test button pressed! " + NetworkManager.instance.get().getSide());
+					System.out.println("Test button pressed! " + Game.instance.get().networkManager.getSide());
 				}, ActionEvent.class), Anchor.EAST)
 
 			.addElement(new Button("testbutton3", "I'm CENTER"))
