@@ -1,25 +1,25 @@
 package nova.sample.block;
 
-import java.util.Optional;
-
 import nova.core.block.Block;
 import nova.core.entity.Entity;
 import nova.core.game.Game;
-import nova.core.network.NetworkManager;
 import nova.core.network.Packet;
 import nova.core.network.PacketReceiver;
 import nova.core.network.PacketSender;
 import nova.core.render.texture.Texture;
+import nova.core.util.Category;
 import nova.core.util.Direction;
 import nova.core.util.transform.Vector3d;
 import nova.sample.NovaTest;
+
+import java.util.Optional;
 
 /**
  * Literally, this is a test block.
  *
  * @author Calclavia
  */
-public class BlockSimpleTest extends Block implements PacketReceiver, PacketSender {
+public class BlockSimpleTest extends Block implements PacketReceiver, PacketSender, Category {
 
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
@@ -47,5 +47,10 @@ public class BlockSimpleTest extends Block implements PacketReceiver, PacketSend
 	@Override
 	public String getID() {
 		return "simple";
+	}
+
+	@Override
+	public String getCategory() {
+		return "buildingBlocks";
 	}
 }

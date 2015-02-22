@@ -4,12 +4,12 @@ import nova.core.block.Block;
 import nova.core.block.components.Stateful;
 import nova.core.entity.Entity;
 import nova.core.game.Game;
-import nova.core.network.NetworkManager;
 import nova.core.network.Packet;
 import nova.core.network.PacketReceiver;
 import nova.core.network.PacketSender;
 import nova.core.network.Sync;
 import nova.core.render.model.Model;
+import nova.core.util.Category;
 import nova.core.util.components.Storable;
 import nova.core.util.components.Stored;
 import nova.core.util.transform.Vector3d;
@@ -17,9 +17,10 @@ import nova.sample.NovaTest;
 
 /**
  * This is a test block that has state.
+ *
  * @author Calclavia
  */
-public class BlockGrinder extends Block implements Storable, Stateful, PacketReceiver, PacketSender {
+public class BlockGrinder extends Block implements Storable, Stateful, PacketReceiver, PacketSender, Category {
 
 	/**
 	 * Angle to rotate around
@@ -54,6 +55,11 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketRec
 	@Override
 	public String getID() {
 		return "stateful";
+	}
+
+	@Override
+	public String getCategory() {
+		return "buildingBlocks";
 	}
 
 	@Override

@@ -76,7 +76,7 @@ public class NovaTest implements Loadable {
 		ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick");
 		//ItemIngredient ingotIngredient = ItemIngredient.forItem("minecraft:iron_ingot");
 		ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
-		ItemIngredient screwdriverIngredient = ItemIngredient.forItem("screwdriver");
+		ItemIngredient screwdriverIngredient = ItemIngredient.forItem(itemScrewdriver.getID());
 		Game.instance.get().recipeManager.addRecipe(new ShapedCraftingRecipe(itemScrewdriver, "A- B", ingotIngredient, stickIngredient));
 		Game.instance.get().recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockTest, "AAA-ABA-AAA", ingotIngredient, screwdriverIngredient));
 

@@ -3,6 +3,7 @@ package nova.sample.item;
 import nova.core.entity.Entity;
 import nova.core.item.Item;
 import nova.core.render.texture.ItemTexture;
+import nova.core.util.Category;
 import nova.core.util.Direction;
 import nova.core.util.transform.Vector3d;
 import nova.core.util.transform.Vector3i;
@@ -14,7 +15,7 @@ import java.util.Optional;
 /**
  * @author Calclavia
  */
-public class ItemScrewdriver extends Item {
+public class ItemScrewdriver extends Item implements Category {
 
 	@Override
 	public boolean onUse(Entity entity, World world, Vector3i position, Direction side, Vector3d hit) {
@@ -28,6 +29,11 @@ public class ItemScrewdriver extends Item {
 
 	@Override
 	public String getID() {
-		return "screwdriver";
+		return "screwdriver2";
+	}
+
+	@Override
+	public String getCategory() {
+		return "tool";
 	}
 }
