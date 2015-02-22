@@ -16,7 +16,6 @@ import nova.core.item.Item;
 import nova.core.item.ItemManager;
 import nova.core.loader.Loadable;
 import nova.core.loader.NovaMod;
-import nova.core.network.NetworkManager;
 import nova.core.recipes.crafting.ItemIngredient;
 import nova.core.recipes.crafting.ShapedCraftingRecipe;
 import nova.core.render.Color;
@@ -77,8 +76,8 @@ public class NovaTest implements Loadable {
 		//ItemIngredient ingotIngredient = ItemIngredient.forItem("minecraft:iron_ingot");
 		ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
 		ItemIngredient screwdriverIngredient = ItemIngredient.forItem(itemScrewdriver.getID());
-		Game.instance.get().recipeManager.addRecipe(new ShapedCraftingRecipe(itemScrewdriver, "A- B", ingotIngredient, stickIngredient));
-		Game.instance.get().recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockTest, "AAA-ABA-AAA", ingotIngredient, screwdriverIngredient));
+		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemScrewdriver, "A- B", ingotIngredient, stickIngredient));
+		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockTest, "AAA-ABA-AAA", ingotIngredient, screwdriverIngredient));
 
 		initializeGUI();
 	}
@@ -89,7 +88,7 @@ public class NovaTest implements Loadable {
 				.setMaximumSize(Integer.MAX_VALUE, 120)
 
 				.registerEventListener((event) -> {
-					System.out.println("Test button pressed! " + Game.instance.get().networkManager.getSide());
+					System.out.println("Test button pressed! " + Game.instance.networkManager.getSide());
 				}, ActionEvent.class), Anchor.EAST)
 
 			.addElement(new Button("testbutton3", "I'm CENTER"))
@@ -123,7 +122,7 @@ public class NovaTest implements Loadable {
 				
 				event.graphics.drawString(100, 100, text);
 			}, RenderEvent.class);
-		
-		Game.instance.get().guiFactory.get().registerGui(testGUI, id);
+
+		Game.instance.guiFactory.get().registerGui(testGUI, id);
 	}
 }

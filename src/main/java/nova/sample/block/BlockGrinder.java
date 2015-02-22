@@ -31,9 +31,9 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketRec
 
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
-		if (Game.instance.get().networkManager.isServer()) {
+		if (Game.instance.networkManager.isServer()) {
 			angle = (angle + Math.PI / 12) % (Math.PI * 2);
-			Game.instance.get().networkManager.sync(this);
+			Game.instance.networkManager.sync(this);
 		}
 		return true;
 	}

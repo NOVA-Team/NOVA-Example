@@ -24,8 +24,8 @@ public class BlockSimpleTest extends Block implements PacketReceiver, PacketSend
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
 		System.out.println("Sending Packet: 1234");
-		Game.instance.get().networkManager.sync(this);
-		Game.instance.get().guiFactory.get().showGui(NovaTest.id, "testgui", entity, position());
+		Game.instance.networkManager.sync(this);
+		Game.instance.guiFactory.get().showGui(NovaTest.id, "testgui", entity, position());
 		return true;
 	}
 
