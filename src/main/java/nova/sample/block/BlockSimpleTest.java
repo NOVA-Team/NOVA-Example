@@ -15,7 +15,6 @@ import java.util.Optional;
 
 /**
  * Literally, this is a test block.
- *
  * @author Calclavia
  */
 public class BlockSimpleTest extends Block implements PacketHandler, Category {
@@ -34,12 +33,12 @@ public class BlockSimpleTest extends Block implements PacketHandler, Category {
 	}
 
 	@Override
-	public void read(int id, Packet packet) {
+	public void read(Packet packet) {
 		System.out.println("Received packet: " + packet.readInt());
 	}
 
 	@Override
-	public void write(int id, Packet packet) {
+	public void write(Packet packet) {
 		packet.writeInt(1234);
 	}
 

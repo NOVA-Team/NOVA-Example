@@ -16,7 +16,6 @@ import nova.sample.NovaTest;
 
 /**
  * This is a test block that has state.
- *
  * @author Calclavia
  */
 public class BlockGrinder extends Block implements Storable, Stateful, PacketHandler, Category {
@@ -46,8 +45,8 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 	}
 
 	@Override
-	public void read(int id, Packet packet) {
-		PacketHandler.super.read(id, packet);
+	public void read(Packet packet) {
+		PacketHandler.super.read(packet);
 		world().markStaticRender(position());
 	}
 
