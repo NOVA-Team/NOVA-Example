@@ -9,9 +9,9 @@ import nova.core.network.PacketHandler;
 import nova.core.network.PacketSender;
 import nova.core.network.Sync;
 import nova.core.render.model.Model;
+import nova.core.retention.Storable;
+import nova.core.retention.Stored;
 import nova.core.util.Category;
-import nova.core.util.components.Storable;
-import nova.core.util.components.Stored;
 import nova.core.util.transform.Vector3d;
 import nova.sample.NovaTest;
 
