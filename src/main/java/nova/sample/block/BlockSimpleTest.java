@@ -5,7 +5,6 @@ import nova.core.entity.Entity;
 import nova.core.game.Game;
 import nova.core.network.Packet;
 import nova.core.network.PacketHandler;
-import nova.core.network.PacketSender;
 import nova.core.render.texture.Texture;
 import nova.core.util.Category;
 import nova.core.util.Direction;
@@ -19,7 +18,7 @@ import java.util.Optional;
  *
  * @author Calclavia
  */
-public class BlockSimpleTest extends Block implements PacketHandler, PacketSender, Category {
+public class BlockSimpleTest extends Block implements PacketHandler, Category {
 
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {

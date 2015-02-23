@@ -6,7 +6,6 @@ import nova.core.entity.Entity;
 import nova.core.game.Game;
 import nova.core.network.Packet;
 import nova.core.network.PacketHandler;
-import nova.core.network.PacketSender;
 import nova.core.network.Sync;
 import nova.core.render.model.Model;
 import nova.core.retention.Storable;
@@ -20,7 +19,7 @@ import nova.sample.NovaTest;
  *
  * @author Calclavia
  */
-public class BlockGrinder extends Block implements Storable, Stateful, PacketHandler, PacketSender, Category {
+public class BlockGrinder extends Block implements Storable, Stateful, PacketHandler, Category {
 
 	/**
 	 * Angle to rotate around
