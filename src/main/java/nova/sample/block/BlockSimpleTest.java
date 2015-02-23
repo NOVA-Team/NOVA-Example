@@ -4,7 +4,7 @@ import nova.core.block.Block;
 import nova.core.entity.Entity;
 import nova.core.game.Game;
 import nova.core.network.Packet;
-import nova.core.network.PacketReceiver;
+import nova.core.network.PacketHandler;
 import nova.core.network.PacketSender;
 import nova.core.render.texture.Texture;
 import nova.core.util.Category;
@@ -19,7 +19,7 @@ import java.util.Optional;
  *
  * @author Calclavia
  */
-public class BlockSimpleTest extends Block implements PacketReceiver, PacketSender, Category {
+public class BlockSimpleTest extends Block implements PacketHandler, PacketSender, Category {
 
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {

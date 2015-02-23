@@ -5,7 +5,7 @@ import nova.core.block.components.Stateful;
 import nova.core.entity.Entity;
 import nova.core.game.Game;
 import nova.core.network.Packet;
-import nova.core.network.PacketReceiver;
+import nova.core.network.PacketHandler;
 import nova.core.network.PacketSender;
 import nova.core.network.Sync;
 import nova.core.render.model.Model;
@@ -20,7 +20,7 @@ import nova.sample.NovaTest;
  *
  * @author Calclavia
  */
-public class BlockGrinder extends Block implements Storable, Stateful, PacketReceiver, PacketSender, Category {
+public class BlockGrinder extends Block implements Storable, Stateful, PacketHandler, PacketSender, Category {
 
 	/**
 	 * Angle to rotate around
@@ -48,7 +48,7 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketRec
 
 	@Override
 	public void read(int id, Packet packet) {
-		PacketReceiver.super.read(id, packet);
+		PacketHandler.super.read(id, packet);
 		world().markStaticRender(position());
 	}
 
