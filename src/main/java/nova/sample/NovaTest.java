@@ -123,6 +123,6 @@ public class NovaTest implements Loadable {
 				event.graphics.drawString(100, 100, text);
 			}, RenderEvent.class);
 
-		Game.instance.guiFactory.get().registerGui(testGUI, id);
+		Game.instance.guiFactory.registerGui(testGUI, id);
 	}
 }
