@@ -23,7 +23,7 @@ public class BlockSimpleTest extends Block implements PacketHandler, Category {
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
 		System.out.println("Sending Packet: 1234");
 		Game.instance.networkManager.sync(this);
-		Game.instance.guiFactory.get().showGui(NovaTest.id, "testgui", entity, position());
+		Game.instance.guiFactory.showGui(NovaTest.id, "testgui", entity, position());
 		return true;
 	}
 

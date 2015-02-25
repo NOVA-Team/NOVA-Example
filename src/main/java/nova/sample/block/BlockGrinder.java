@@ -41,7 +41,7 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 		Model grinderModel = NovaTest.grinderModel.getModel();
 		//		grinderModel.children.removeIf(m -> !m.name.equals("Shape2"));
 		model.children.add(grinderModel);
-		model.bind(NovaTest.grinderTexture);
+		model.bindAll(NovaTest.grinderTexture);
 	}
 
 	@Override
