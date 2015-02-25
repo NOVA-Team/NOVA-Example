@@ -9,21 +9,21 @@ import nova.core.gui.GuiEvent.BindEvent;
 import nova.core.gui.GuiEvent.RenderEvent;
 import nova.core.gui.GuiEvent.UnBindEvent;
 import nova.core.gui.components.Button;
+import nova.core.gui.factory.GuiFactory;
 import nova.core.gui.layout.Anchor;
 import nova.core.gui.render.FormattedText;
-import nova.core.gui.render.FormattedText.TextFormat;
 import nova.core.item.Item;
 import nova.core.item.ItemManager;
 import nova.core.loader.Loadable;
 import nova.core.loader.NovaMod;
 import nova.core.recipes.crafting.ItemIngredient;
 import nova.core.recipes.crafting.ShapedCraftingRecipe;
-import nova.core.render.Color;
 import nova.core.render.RenderManager;
 import nova.core.render.model.ModelProvider;
 import nova.core.render.model.TechneModel;
 import nova.core.render.texture.BlockTexture;
 import nova.core.render.texture.ItemTexture;
+import nova.core.render.texture.Texture;
 import nova.sample.block.BlockGrinder;
 import nova.sample.block.BlockSimpleTest;
 import nova.sample.item.ItemScrewdriver;
@@ -46,15 +46,19 @@ public class NovaTest implements Loadable {
 	public static ItemTexture screwTexture;
 	public static BlockTexture grinderTexture;
 	public static ModelProvider grinderModel;
+	
+	public static GuiFactory guiFactory;
 
 	public final BlockManager blockManager;
 	public final ItemManager itemManager;
 	public final RenderManager renderManager;
 
-	public NovaTest(BlockManager blockManager, ItemManager itemManager, RenderManager renderManager) {
+	public NovaTest(BlockManager blockManager, ItemManager itemManager, RenderManager renderManager, GuiFactory guiFactory) {
 		this.blockManager = blockManager;
 		this.itemManager = itemManager;
 		this.renderManager = renderManager;
+		
+		NovaTest.guiFactory = guiFactory;
 	}
 
 	@Override
@@ -104,25 +108,23 @@ public class NovaTest implements Loadable {
 			}, UnBindEvent.class)
 		
 			.registerListener((event) -> {	
-				FormattedText text = new FormattedText("Let's draw", new TextFormat((format) -> {
-					format.shadow = true;
-					format.bold = true;
-					format.underline = true;
-					format.color = Color.pink;
-				}))
-				.add(" some stuff", (format) -> {
-					format.italic = true;
-					format.color = Color.red;
-				})
-				.add(" on here!", (format) -> {
-					format.color = Color.cyan;
-					format.underline = false;
-					format.strikethrough = true;
-				});
+
+				FormattedText lorem = FormattedText.parse("&cr12893;&bd;Lorem ipsum dolor&it;&cr0; sit amet, consetetur sadipscing elitr, "
+						+ "sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, "
+						+ "sed diam voluptua. At vero&rt;&cr-1;&sh; eos et accusam et justo duo dolores et ea rebum. "
+						+ "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. "
+						+ "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod "
+						+ "tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero "
+						+ "eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea "
+						+ "takimata sanctus est Lorem ipsum dolor sit amet.");
 				
-				event.graphics.drawString(100, 100, text);
+				event.graphics.drawTexture(50, 50, 64, 64, new Texture(id, "/textures/blocks/blockSteel.png"));
+				event.graphics.drawEllipse(100, 100, 100, 100);
+				
+				event.graphics.drawString(20, 20, lorem, 400);
+												
 			}, RenderEvent.class);
 
-		Game.instance.guiFactory.registerGui(testGUI, id);
+		guiFactory.registerGui(testGUI, id);
 	}
 }
