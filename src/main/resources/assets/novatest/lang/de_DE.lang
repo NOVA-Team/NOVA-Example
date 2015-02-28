@@ -1,0 +1,9 @@
+# NOVA Test Language File
+# @author Calclavia and Vexatos
+
+# Blocks
+tile.stateful.name=Block mit Status
+tile.simple.name=Einfacher Block
+
+# Items
+item.screwdriver.name=Schraubendreher
