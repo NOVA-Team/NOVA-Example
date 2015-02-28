@@ -11,6 +11,7 @@ import nova.core.gui.GuiEvent.UnBindEvent;
 import nova.core.gui.components.Button;
 import nova.core.gui.factory.GuiFactory;
 import nova.core.gui.layout.Anchor;
+import nova.core.gui.layout.FlowLayout;
 import nova.core.item.Item;
 import nova.core.item.ItemManager;
 import nova.core.loader.Loadable;
@@ -87,25 +88,28 @@ public class NovaTest implements Loadable {
 
 	public void initializeGUI() {
 		Gui testGUI = new Gui("testgui")
-			.addElement(new Button("testbutton2", "I'm EAST")
+			.add(new Button("testbutton2", "I'm EAST")
 				.setMaximumSize(Integer.MAX_VALUE, 120)
 
-				.registerEventListener((event) -> {
+				.onEvent((event) -> {
 					System.out.println("Test button pressed! " + Side.get());
 				}, ActionEvent.class), Anchor.EAST)
 
-			.addElement(new Button("testbutton3", "I'm CENTER"))
-			.addElement(new GuiContainer("container")
-					.addElement(new Button("testbutton4", "I'm WEST"), Anchor.WEST)
-					.addElement(new Button("testbutton5", "I'm EAST"), Anchor.EAST)
+			.add(new Button("testbutton3", "I'm CENTER"))
+			.add(new Button("testbutton4", "I'm SOUTH"), Anchor.SOUTH)
+			
+			.add(new GuiContainer("container").setLayout(new FlowLayout())
+				.add(new Button("testbutton5", "I'm the FIRST Button and need lots of space"))
+				.add(new Button("testbutton6", "I'm SECOND and still quite big"))
+				.add(new Button("testbutton7", "I'm THIRD"))
+				.add(new Button("testbutton8", "I'm FOURTH"))
 			, Anchor.NORTH)
-			.addElement(new Button("testbutton6", "I'm SOUTH"), Anchor.SOUTH)
 
-			.registerListener((event) -> {
+			.onGuiEvent((event) -> {
 				System.out.println("Test GUI initialized! " + event.player.getDisplayName() + " " + event.position);
 			}, BindEvent.class)
 
-			.registerListener((event) -> {
+			.onGuiEvent((event) -> {
 				System.out.println("Test GUI closed!");
 			}, UnBindEvent.class);
 
