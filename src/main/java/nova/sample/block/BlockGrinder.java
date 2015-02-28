@@ -4,6 +4,7 @@ import nova.core.block.Block;
 import nova.core.block.components.Stateful;
 import nova.core.entity.Entity;
 import nova.core.game.Game;
+import nova.core.network.NetworkTarget;
 import nova.core.network.Packet;
 import nova.core.network.PacketHandler;
 import nova.core.network.Sync;
@@ -11,6 +12,7 @@ import nova.core.render.model.Model;
 import nova.core.retention.Storable;
 import nova.core.retention.Stored;
 import nova.core.util.Category;
+import nova.core.util.transform.Quaternion;
 import nova.core.util.transform.Vector3d;
 import nova.sample.NovaTest;
 
@@ -29,7 +31,7 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
-		if (Game.instance.networkManager.isServer()) {
+		if (NetworkTarget.Side.get() == NetworkTarget.Side.SERVER) {
 			angle = (angle + Math.PI / 12) % (Math.PI * 2);
 			Game.instance.networkManager.sync(this);
 		}
@@ -39,7 +41,7 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 	@Override
 	public void renderStatic(Model model) {
 		Model grinderModel = NovaTest.grinderModel.getModel();
-		//		grinderModel.children.removeIf(m -> !m.name.equals("Shape2"));
+		grinderModel.rotate(Quaternion.fromEuler(angle, 0, 0));
 		model.children.add(grinderModel);
 		model.bindAll(NovaTest.grinderTexture);
 	}

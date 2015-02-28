@@ -1,9 +1,8 @@
 package nova.sample.block;
 
-import java.util.Optional;
-
 import nova.core.block.Block;
 import nova.core.entity.Entity;
+import nova.core.game.Game;
 import nova.core.network.Packet;
 import nova.core.network.PacketHandler;
 import nova.core.render.texture.Texture;
@@ -11,6 +10,8 @@ import nova.core.util.Category;
 import nova.core.util.Direction;
 import nova.core.util.transform.Vector3d;
 import nova.sample.NovaTest;
+
+import java.util.Optional;
 
 /**
  * Literally, this is a test block.
@@ -21,9 +22,9 @@ public class BlockSimpleTest extends Block implements PacketHandler, Category {
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
 		NovaTest.guiFactory.showGui(NovaTest.id, "testgui", entity, position());
-		// TODO currently broken
-//		System.out.println("Sending Packet: 1234");
-//		Game.instance.networkManager.sync(this);
+
+		System.out.println("Sending Packet: 1234");
+		Game.instance.networkManager.sync(this);
 		return true;
 	}
 
