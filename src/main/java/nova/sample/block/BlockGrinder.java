@@ -41,7 +41,11 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 	@Override
 	public void renderStatic(Model model) {
 		Model grinderModel = NovaTest.grinderModel.getModel();
-		grinderModel.rotate(Quaternion.fromEuler(angle, 0, 0));
+
+		grinderModel
+			.combineChildren("crank", "crank1", "crank2", "crank3")
+			.rotate(Quaternion.fromEuler(0, angle, 0));
+		
 		model.children.add(grinderModel);
 		model.bindAll(NovaTest.grinderTexture);
 	}
