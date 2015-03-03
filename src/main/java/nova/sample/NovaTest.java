@@ -3,12 +3,14 @@ package nova.sample;
 import nova.core.block.Block;
 import nova.core.block.BlockManager;
 import nova.core.game.Game;
+import nova.core.gui.Background;
 import nova.core.gui.ComponentEvent.ActionEvent;
 import nova.core.gui.Gui;
 import nova.core.gui.GuiContainer;
 import nova.core.gui.GuiEvent.BindEvent;
 import nova.core.gui.GuiEvent.UnBindEvent;
 import nova.core.gui.components.Button;
+import nova.core.gui.components.Label;
 import nova.core.gui.factory.GuiFactory;
 import nova.core.gui.layout.Anchor;
 import nova.core.gui.layout.FlowLayout;
@@ -19,6 +21,7 @@ import nova.core.loader.NovaMod;
 import nova.core.network.NetworkTarget.Side;
 import nova.core.recipes.crafting.ItemIngredient;
 import nova.core.recipes.crafting.ShapedCraftingRecipe;
+import nova.core.render.Color;
 import nova.core.render.RenderManager;
 import nova.core.render.model.ModelProvider;
 import nova.core.render.model.TechneModel;
@@ -91,7 +94,7 @@ public class NovaTest implements Loadable {
 			.add(new Button("testbutton2", "I'm EAST")
 				.setMaximumSize(Integer.MAX_VALUE, 120)
 
-				.onEvent((event) -> {
+				.onEvent((event, component) -> {
 					System.out.println("Test button pressed! " + Side.get());
 				}, ActionEvent.class), Anchor.EAST)
 
@@ -100,7 +103,7 @@ public class NovaTest implements Loadable {
 			
 			.add(new GuiContainer("container").setLayout(new FlowLayout())
 				.add(new Button("testbutton5", "I'm the FIRST Button and need lots of space"))
-				.add(new Button("testbutton6", "I'm SECOND and still quite big"))
+				.add(new Label("testlabel1", "I'm some label hanging around").setBackground(new Background(Color.white)))
 				.add(new Button("testbutton7", "I'm THIRD"))
 				.add(new Button("testbutton8", "I'm FOURTH"))
 			, Anchor.NORTH)
@@ -112,7 +115,7 @@ public class NovaTest implements Loadable {
 			.onGuiEvent((event) -> {
 				System.out.println("Test GUI closed!");
 			}, UnBindEvent.class);
-
+		
 		guiFactory.registerGui(testGUI, id);
 	}
 }
