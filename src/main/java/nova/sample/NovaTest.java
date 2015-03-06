@@ -6,10 +6,10 @@ import nova.core.game.Game;
 import nova.core.gui.Background;
 import nova.core.gui.ComponentEvent.ActionEvent;
 import nova.core.gui.Gui;
-import nova.core.gui.GuiContainer;
 import nova.core.gui.GuiEvent.BindEvent;
 import nova.core.gui.GuiEvent.UnBindEvent;
 import nova.core.gui.components.Button;
+import nova.core.gui.components.Container;
 import nova.core.gui.components.Label;
 import nova.core.gui.factory.GuiFactory;
 import nova.core.gui.layout.Anchor;
@@ -96,16 +96,21 @@ public class NovaTest implements Loadable {
 
 				.onEvent((event, component) -> {
 					System.out.println("Test button pressed! " + Side.get());
-				}, ActionEvent.class), Anchor.EAST)
+				}, ActionEvent.class, Side.BOTH), Anchor.EAST)
 
 			.add(new Button("testbutton3", "I'm CENTER"))
 			.add(new Button("testbutton4", "I'm SOUTH"), Anchor.SOUTH)
 			
-			.add(new GuiContainer("container").setLayout(new FlowLayout())
-				.add(new Button("testbutton5", "I'm the FIRST Button and need lots of space"))
-				.add(new Label("testlabel1", "I'm some label hanging around").setBackground(new Background(Color.white)))
-				.add(new Button("testbutton7", "I'm THIRD"))
-				.add(new Button("testbutton8", "I'm FOURTH"))
+			.add(new Container("container")
+				.add(new Container("container").setLayout(new FlowLayout())
+					.add(new Button("testbutton5", "I'm the FIRST Button and need lots of space"))
+					.add(new Label("testlabel1", "I'm some label hanging around").setBackground(new Background(Color.white)))
+					.add(new Button("testbutton7", "I'm THIRD"))
+					.add(new Button("testbutton8", "I'm FOURTH"))
+				)
+				.add(new Button("close", "X")
+					.onEvent((event, component) -> guiFactory.closeGui(), ActionEvent.class)
+				, Anchor.EAST)		
 			, Anchor.NORTH)
 
 			.onGuiEvent((event) -> {
