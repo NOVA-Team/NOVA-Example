@@ -13,6 +13,7 @@ import nova.core.render.model.Model;
 import nova.core.retention.Storable;
 import nova.core.retention.Stored;
 import nova.core.util.Category;
+import nova.core.util.components.Updater;
 import nova.core.util.transform.Quaternion;
 import nova.core.util.transform.Vector3d;
 import nova.sample.NovaTest;
@@ -73,4 +74,5 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 	public boolean isOpaqueCube() {
 		return false;
 	}
+
 }
