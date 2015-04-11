@@ -1,8 +1,8 @@
 package nova.sample.block;
 
 import nova.core.block.Block;
-import nova.core.block.components.Modelled;
 import nova.core.block.components.Stateful;
+import nova.core.block.components.StaticRenderer;
 import nova.core.entity.Entity;
 import nova.core.game.Game;
 import nova.core.network.NetworkTarget;
@@ -13,7 +13,6 @@ import nova.core.render.model.Model;
 import nova.core.retention.Storable;
 import nova.core.retention.Stored;
 import nova.core.util.Category;
-import nova.core.util.components.Updater;
 import nova.core.util.transform.Quaternion;
 import nova.core.util.transform.Vector3d;
 import nova.sample.NovaTest;
@@ -23,7 +22,7 @@ import nova.sample.NovaTest;
  * 
  * @author Calclavia
  */
-public class BlockGrinder extends Block implements Storable, Stateful, PacketHandler, Category, Modelled {
+public class BlockGrinder extends Block implements Storable, Stateful, PacketHandler, Category, StaticRenderer {
 
 	/**
 	 * Angle to rotate around
