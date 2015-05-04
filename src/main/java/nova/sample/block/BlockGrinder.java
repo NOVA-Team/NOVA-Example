@@ -1,6 +1,7 @@
 package nova.sample.block;
 
 import nova.core.block.Block;
+import nova.core.block.components.ItemRenderer;
 import nova.core.block.components.Stateful;
 import nova.core.block.components.StaticRenderer;
 import nova.core.entity.Entity;
@@ -19,10 +20,9 @@ import nova.sample.NovaTest;
 
 /**
  * This is a test block that has state.
- * 
  * @author Calclavia
  */
-public class BlockGrinder extends Block implements Storable, Stateful, PacketHandler, Category, StaticRenderer {
+public class BlockGrinder extends Block implements Storable, Stateful, PacketHandler, Category, StaticRenderer, ItemRenderer {
 
 	/**
 	 * Angle to rotate around
