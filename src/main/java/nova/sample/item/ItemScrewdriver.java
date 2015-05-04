@@ -34,6 +34,6 @@ public class ItemScrewdriver extends Item implements Category {
 
 	@Override
 	public String getCategory() {
-		return "tool";
+		return "tools";
 	}
 }
