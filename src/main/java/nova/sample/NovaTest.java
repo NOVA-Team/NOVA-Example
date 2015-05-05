@@ -1,6 +1,6 @@
 package nova.sample;
 
-import nova.core.block.Block;
+import nova.core.block.BlockFactory;
 import nova.core.block.BlockManager;
 import nova.core.entity.EntityFactory;
 import nova.core.entity.EntityManager;
@@ -16,7 +16,7 @@ import nova.core.gui.components.Label;
 import nova.core.gui.factory.GuiFactory;
 import nova.core.gui.layout.Anchor;
 import nova.core.gui.layout.FlowLayout;
-import nova.core.item.Item;
+import nova.core.item.ItemFactory;
 import nova.core.item.ItemManager;
 import nova.core.loader.Loadable;
 import nova.core.loader.NovaMod;
@@ -46,10 +46,10 @@ public class NovaTest implements Loadable {
 
 	public static final String id = "novatest";
 
-	public static Block blockTest, blockGrinder;
-	public static Item itemScrewdriver;
-	public static Item itemBlockTest;
-	public static Item itemBlockGrinder;
+	public static BlockFactory blockTest, blockGrinder;
+	public static ItemFactory itemScrewdriver;
+	public static ItemFactory itemBlockTest;
+	public static ItemFactory itemBlockGrinder;
 
 	public static BlockTexture steelTexture;
 	public static ItemTexture screwTexture;
@@ -100,8 +100,8 @@ public class NovaTest implements Loadable {
 		// ItemIngredient.forItem("minecraft:iron_ingot");
 		ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
 		ItemIngredient screwdriverIngredient = ItemIngredient.forItem(itemScrewdriver.getID());
-		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemScrewdriver, "A- B", ingotIngredient, stickIngredient));
-		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockTest, "AAA-ABA-AAA", ingotIngredient, screwdriverIngredient));
+		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemScrewdriver.makeItem(), "A- B", ingotIngredient, stickIngredient));
+		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockTest.makeItem(), "AAA-ABA-AAA", ingotIngredient, screwdriverIngredient));
 
 		initializeGUI();
 	}
