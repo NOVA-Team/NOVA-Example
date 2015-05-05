@@ -37,7 +37,7 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 			angle = (angle + Math.PI / 12) % (Math.PI * 2);
 			Game.instance.networkManager.sync(this);
 		}
-		world().createEntity(NovaTest.movableSimpleTestFactory).setPosition(entity.position());
+		world().addEntity(NovaTest.movableSimpleTestFactory).setPosition(entity.position());
 		return true;
 	}
 
