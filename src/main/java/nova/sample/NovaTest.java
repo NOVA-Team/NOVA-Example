@@ -13,7 +13,8 @@ import nova.core.gui.GuiEvent.UnBindEvent;
 import nova.core.gui.components.Button;
 import nova.core.gui.components.Container;
 import nova.core.gui.components.Label;
-import nova.core.gui.factory.GuiFactory;
+import nova.core.gui.components.inventory.Slot;
+import nova.core.gui.factory.GuiManager;
 import nova.core.gui.layout.Anchor;
 import nova.core.gui.layout.FlowLayout;
 import nova.core.item.ItemFactory;
@@ -59,7 +60,7 @@ public class NovaTest implements Loadable {
 
 	public static EntityFactory movableSimpleTestFactory;
 
-	public static GuiFactory guiFactory;
+	public static GuiManager guiFactory;
 
 	public final BlockManager blockManager;
 	public final ItemManager itemManager;
@@ -67,7 +68,7 @@ public class NovaTest implements Loadable {
 	public final EntityManager entityManager;
 	public final NativeManager nativeManager;
 
-	public NovaTest(BlockManager blockManager, ItemManager itemManager, RenderManager renderManager, GuiFactory guiFactory, EntityManager entityManager, NativeManager nativeManager) {
+	public NovaTest(BlockManager blockManager, ItemManager itemManager, RenderManager renderManager, GuiManager guiFactory, EntityManager entityManager, NativeManager nativeManager) {
 		this.blockManager = blockManager;
 		this.itemManager = itemManager;
 		this.renderManager = renderManager;
@@ -102,12 +103,12 @@ public class NovaTest implements Loadable {
 		ItemIngredient screwdriverIngredient = ItemIngredient.forItem(itemScrewdriver.getID());
 		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemScrewdriver.makeItem(), "A- B", ingotIngredient, stickIngredient));
 		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockTest.makeItem(), "AAA-ABA-AAA", ingotIngredient, screwdriverIngredient));
-
+		
 		initializeGUI();
 	}
 
-	public void initializeGUI() {
-		Gui testGUI = new Gui("testgui")
+	public static void initializeGUI() {
+		guiFactory.register(() -> new Gui("testgui")
 			.add(new Button("testbutton2", "I'm EAST")
 				.setMaximumSize(Integer.MAX_VALUE, 120)
 
@@ -116,29 +117,29 @@ public class NovaTest implements Loadable {
 				}, ActionEvent.class, Side.BOTH), Anchor.EAST)
 
 			.add(new Button("testbutton3", "I'm CENTER"))
-			.add(new Button("testbutton4", "I'm SOUTH"), Anchor.SOUTH)
+			.add(new Container("test").setLayout(new FlowLayout())
+				.add(new Slot("main", 0))
+				.add(new Slot("main", 0))
+				.add(new Slot("main", 0))
+				.add(new Slot("main", 0))
+			, Anchor.SOUTH)
 
-			.add(new Container("container")
-				.add(new Container("container").setLayout(new FlowLayout())
-					.add(new Button("testbutton5", "I'm the FIRST Button and need lots of space"))
-					.add(new Label("testlabel1", "I'm some label hanging around").setBackground(new Background(Color.white)))
-					.add(new Button("testbutton7", "I'm THIRD"))
-					.add(new Button("testbutton8", "I'm FOURTH"))
-				)
-				.add(new Button("close", "X")
-					.onEvent((event, component) -> guiFactory.closeGui(), ActionEvent.class)
-						, Anchor.EAST)
-					, Anchor.NORTH)
+			.add(new Container("container").setLayout(new FlowLayout())
+				.add(new Button("testbutton5", "I'm the FIRST Button and need lots of space"))
+				.add(new Label("testlabel1", "I'm some label hanging around").setBackground(new Background(Color.white)))
+				.add(new Button("testbutton7", "I'm THIRD"))
+				.add(new Button("testbutton8", "I'm FOURTH"))
+			, Anchor.NORTH)
 
 			.onGuiEvent((event) -> {
+				event.gui.addInventory("main", ((BlockSimpleTest)event.block.get()).inventory);
 				System.out.println("Test GUI initialized! " + event.player.getDisplayName() + " " + event.position);
 			}, BindEvent.class)
 
 			.onGuiEvent((event) -> {
 				System.out.println("Test GUI closed!");
-			}, UnBindEvent.class);
-
-		guiFactory.registerGui(testGUI, id);
+			}, UnBindEvent.class)
+		);
 	}
 
 	public static void checkConversion(Object obj, String string) {
