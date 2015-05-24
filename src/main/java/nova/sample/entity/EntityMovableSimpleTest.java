@@ -1,19 +1,18 @@
 package nova.sample.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import nova.core.entity.Entity;
 import nova.core.entity.components.Collidable;
-import nova.core.game.Game;
 import nova.core.network.Sync;
 import nova.core.render.model.Model;
 import nova.core.retention.Storable;
 import nova.core.retention.Stored;
 import nova.core.util.components.Updater;
-import nova.core.util.transform.Cuboid;
 import nova.core.util.transform.Quaternion;
+import nova.core.util.transform.shape.Cuboid;
 import nova.sample.NovaTest;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class EntityMovableSimpleTest extends Entity implements Collidable, Storable, Updater {
 
