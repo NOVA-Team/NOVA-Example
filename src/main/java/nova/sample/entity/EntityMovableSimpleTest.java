@@ -1,5 +1,6 @@
 package nova.sample.entity;
 
+import nova.core.component.Updater;
 import nova.core.entity.Entity;
 import nova.core.entity.component.Collidable;
 import nova.core.network.Sync;
@@ -8,7 +9,6 @@ import nova.core.retention.Storable;
 import nova.core.retention.Stored;
 import nova.core.util.transform.matrix.Quaternion;
 import nova.core.util.transform.shape.Cuboid;
-import nova.core.world.component.Updater;
 import nova.sample.NovaTest;
 
 import java.util.ArrayList;
