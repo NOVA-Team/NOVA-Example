@@ -10,10 +10,10 @@ import nova.core.gui.ComponentEvent.ActionEvent;
 import nova.core.gui.Gui;
 import nova.core.gui.GuiEvent.BindEvent;
 import nova.core.gui.GuiEvent.UnBindEvent;
-import nova.core.gui.components.Button;
-import nova.core.gui.components.Container;
-import nova.core.gui.components.Label;
-import nova.core.gui.components.inventory.Slot;
+import nova.core.gui.component.Button;
+import nova.core.gui.component.Container;
+import nova.core.gui.component.Label;
+import nova.core.gui.component.inventory.Slot;
 import nova.core.gui.factory.GuiManager;
 import nova.core.gui.layout.Anchor;
 import nova.core.gui.layout.FlowLayout;
@@ -78,35 +78,6 @@ public class NovaTest implements Loadable {
 		NovaTest.guiFactory = guiFactory;
 	}
 
-	@Override
-	public void preInit() {
-		blockTest = blockManager.register(BlockSimpleTest.class);
-		blockGrinder = blockManager.register(BlockGrinder.class);
-
-		itemScrewdriver = itemManager.register(ItemScrewdriver.class);
-		itemBlockTest = itemManager.getItemFromBlock(blockTest);
-		itemBlockGrinder = itemManager.getItemFromBlock(blockGrinder);
-
-		screwTexture = renderManager.registerTexture(new ItemTexture(id, "screwdriver"));
-		steelTexture = renderManager.registerTexture(new BlockTexture(id, "blockSteel"));
-		grinderTexture = renderManager.registerTexture(new BlockTexture(id, "grinder"));
-		grinderEntityTexture = renderManager.registerTexture(new EntityTexture(id, "grinderEntity"));
-		grinderModel = renderManager.registerModel(new TechneModel(id, "grinder"));
-
-		movableSimpleTestFactory = entityManager.register(EntityMovableSimpleTest.class);
-
-		// try to add a recipe
-		ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick");
-		// ItemIngredient ingotIngredient =
-		// ItemIngredient.forItem("minecraft:iron_ingot");
-		ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
-		ItemIngredient screwdriverIngredient = ItemIngredient.forItem(itemScrewdriver.getID());
-		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemScrewdriver.makeItem(), "A- B", ingotIngredient, stickIngredient));
-		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockTest.makeItem(), "AAA-ABA-AAA", ingotIngredient, screwdriverIngredient));
-		
-		initializeGUI();
-	}
-
 	public static void initializeGUI() {
 		guiFactory.register(() -> new Gui("testgui")
 			.add(new Button("testbutton2", "I'm EAST")
@@ -149,5 +120,34 @@ public class NovaTest implements Loadable {
 		{
 			System.out.println("NativeManager is not converting "+string+" properly, set a breakpoint in NovaTest.checkConversion");
 		}
+	}
+
+	@Override
+	public void preInit() {
+		blockTest = blockManager.register(BlockSimpleTest.class);
+		blockGrinder = blockManager.register(BlockGrinder.class);
+
+		itemScrewdriver = itemManager.register(ItemScrewdriver.class);
+		itemBlockTest = itemManager.getItemFromBlock(blockTest);
+		itemBlockGrinder = itemManager.getItemFromBlock(blockGrinder);
+
+		screwTexture = renderManager.registerTexture(new ItemTexture(id, "screwdriver"));
+		steelTexture = renderManager.registerTexture(new BlockTexture(id, "blockSteel"));
+		grinderTexture = renderManager.registerTexture(new BlockTexture(id, "grinder"));
+		grinderEntityTexture = renderManager.registerTexture(new EntityTexture(id, "grinderEntity"));
+		grinderModel = renderManager.registerModel(new TechneModel(id, "grinder"));
+
+		movableSimpleTestFactory = entityManager.register(EntityMovableSimpleTest.class);
+
+		// try to add a recipe
+		ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick");
+		// ItemIngredient ingotIngredient =
+		// ItemIngredient.forItem("minecraft:iron_ingot");
+		ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
+		ItemIngredient screwdriverIngredient = ItemIngredient.forItem(itemScrewdriver.getID());
+		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemScrewdriver.makeItem(), "A- B", ingotIngredient, stickIngredient));
+		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockTest.makeItem(), "AAA-ABA-AAA", ingotIngredient, screwdriverIngredient));
+
+		initializeGUI();
 	}
 }
