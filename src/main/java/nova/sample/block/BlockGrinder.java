@@ -14,7 +14,7 @@ import nova.core.render.model.Model;
 import nova.core.retention.Storable;
 import nova.core.retention.Stored;
 import nova.core.util.Category;
-import nova.core.util.transform.Quaternion;
+import nova.core.util.transform.matrix.Quaternion;
 import nova.core.util.transform.vector.Vector3d;
 import nova.sample.NovaTest;
 

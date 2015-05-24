@@ -7,7 +7,7 @@ import nova.core.render.model.Model;
 import nova.core.retention.Storable;
 import nova.core.retention.Stored;
 import nova.core.util.components.Updater;
-import nova.core.util.transform.Quaternion;
+import nova.core.util.transform.matrix.Quaternion;
 import nova.core.util.transform.shape.Cuboid;
 import nova.sample.NovaTest;
 
