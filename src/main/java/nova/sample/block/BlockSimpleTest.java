@@ -21,10 +21,15 @@ import java.util.Optional;
  * Literally, this is a test block.
  * @author Calclavia
  */
-public class BlockSimpleTest extends Block implements PacketHandler, Category, StaticRenderer, ItemRenderer {
+public class BlockSimpleTest extends Block implements PacketHandler, Category {
 
 	public Inventory inventory = new InventorySimple(1);
-	
+
+	public BlockSimpleTest() {
+		add(new StaticRenderer(this));
+		add(new ItemRenderer(this));
+	}
+
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
 		NovaTest.initializeGUI();

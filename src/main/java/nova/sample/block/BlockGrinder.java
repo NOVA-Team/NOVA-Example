@@ -1,7 +1,7 @@
 package nova.sample.block;
 
 import nova.core.block.Block;
-import nova.core.block.component.Stateful;
+import nova.core.block.Stateful;
 import nova.core.component.renderer.ItemRenderer;
 import nova.core.component.renderer.StaticRenderer;
 import nova.core.entity.Entity;
@@ -22,14 +22,32 @@ import nova.sample.NovaTest;
  * This is a test block that has state.
  * @author Calclavia
  */
-public class BlockGrinder extends Block implements Storable, Stateful, PacketHandler, Category, StaticRenderer, ItemRenderer {
+public class BlockGrinder extends Block implements Storable, Stateful, PacketHandler, Category {
 
 	/**
 	 * Angle to rotate around
 	 */
 	@Stored
 	@Sync
-	private double angle;
+	private double angle = 0;
+
+	public BlockGrinder() {
+		add(new StaticRenderer(this) {
+			@Override
+			public void renderStatic(Model model) {
+				Model grinderModel = NovaTest.grinderModel.getModel();
+
+				grinderModel
+					.combineChildren("crank", "crank1", "crank2", "crank3")
+					.rotate(Quaternion.fromEuler(0, angle, 0));
+
+				model.children.add(grinderModel);
+				model.bindAll(NovaTest.grinderTexture);
+			}
+		});
+
+		add(new ItemRenderer(this));
+	}
 
 	@Override
 	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
@@ -39,18 +57,6 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 		}
 		world().addEntity(NovaTest.movableSimpleTestFactory).setPosition(entity.position());
 		return true;
-	}
-
-	@Override
-	public void renderStatic(Model model) {
-		Model grinderModel = NovaTest.grinderModel.getModel();
-
-		grinderModel
-			.combineChildren("crank", "crank1", "crank2", "crank3")
-			.rotate(Quaternion.fromEuler(0, angle, 0));
-
-		model.children.add(grinderModel);
-		model.bindAll(NovaTest.grinderTexture);
 	}
 
 	@Override
