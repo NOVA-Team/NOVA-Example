@@ -114,8 +114,8 @@ public class NovaTest implements Loadable {
 	}
 
 	public static void checkConversion(Object obj, String string) {
-		Object nativeObj = Game.instance.nativeManager.convertToNative(obj).orElse(null);
-		Object shouldBeObj = Game.instance.nativeManager.convertToNova(nativeObj).orElse(null);
+		Object nativeObj = Game.instance.nativeManager.toNative(obj);
+		Object shouldBeObj = Game.instance.nativeManager.toNova(nativeObj);
 		if (shouldBeObj != obj)
 		{
 			System.out.println("NativeManager is not converting "+string+" properly, set a breakpoint in NovaTest.checkConversion");
