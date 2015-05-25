@@ -1,10 +1,8 @@
 package nova.sample.block;
 
-import java.util.Optional;
-
 import nova.core.block.Block;
-import nova.core.block.components.ItemRenderer;
-import nova.core.block.components.StaticRenderer;
+import nova.core.component.renderer.ItemRenderer;
+import nova.core.component.renderer.StaticRenderer;
 import nova.core.entity.Entity;
 import nova.core.game.Game;
 import nova.core.inventory.Inventory;
@@ -16,6 +14,8 @@ import nova.core.util.Category;
 import nova.core.util.Direction;
 import nova.core.util.transform.vector.Vector3d;
 import nova.sample.NovaTest;
+
+import java.util.Optional;
 
 /**
  * Literally, this is a test block.

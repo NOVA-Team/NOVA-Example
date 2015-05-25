@@ -1,9 +1,9 @@
 package nova.sample.block;
 
 import nova.core.block.Block;
-import nova.core.block.components.ItemRenderer;
-import nova.core.block.components.Stateful;
-import nova.core.block.components.StaticRenderer;
+import nova.core.block.component.Stateful;
+import nova.core.component.renderer.ItemRenderer;
+import nova.core.component.renderer.StaticRenderer;
 import nova.core.entity.Entity;
 import nova.core.game.Game;
 import nova.core.network.NetworkTarget;
