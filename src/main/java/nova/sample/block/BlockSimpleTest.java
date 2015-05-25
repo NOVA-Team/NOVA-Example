@@ -34,7 +34,7 @@ public class BlockSimpleTest extends Block implements PacketHandler, Category {
 
 	public void onRightClick(RightClickEvent evt) {
 		NovaTest.initializeGUI();
-		NovaTest.guiFactory.showGui("testgui", evt.entity, position());
+		NovaTest.guiFactory.showGui("testgui", evt.entity, transform.position());
 
 		System.out.println("Sending Packet: 1234");
 		Game.instance.networkManager.sync(this);
