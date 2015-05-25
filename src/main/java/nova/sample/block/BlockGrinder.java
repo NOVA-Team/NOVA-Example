@@ -2,6 +2,7 @@ package nova.sample.block;
 
 import nova.core.block.Block;
 import nova.core.block.Stateful;
+import nova.core.block.component.BlockCollider;
 import nova.core.component.renderer.ItemRenderer;
 import nova.core.component.renderer.StaticRenderer;
 import nova.core.entity.Entity;
@@ -32,6 +33,14 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 	private double angle = 0;
 
 	public BlockGrinder() {
+
+		add(new BlockCollider(this) {
+			@Override
+			public boolean isOpaqueCube() {
+				return false;
+			}
+		});
+
 		add(new StaticRenderer(this) {
 			@Override
 			public void renderStatic(Model model) {
@@ -74,10 +83,4 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 	public String getCategory() {
 		return "buildingBlocks";
 	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
 }
