@@ -5,7 +5,6 @@ import nova.core.block.Stateful;
 import nova.core.block.component.BlockCollider;
 import nova.core.component.renderer.ItemRenderer;
 import nova.core.component.renderer.StaticRenderer;
-import nova.core.entity.Entity;
 import nova.core.game.Game;
 import nova.core.network.NetworkTarget;
 import nova.core.network.Packet;
@@ -16,7 +15,6 @@ import nova.core.retention.Storable;
 import nova.core.retention.Stored;
 import nova.core.util.Category;
 import nova.core.util.transform.matrix.Quaternion;
-import nova.core.util.transform.vector.Vector3d;
 import nova.sample.NovaTest;
 
 /**
@@ -34,12 +32,7 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 
 	public BlockGrinder() {
 
-		add(new BlockCollider(this) {
-			@Override
-			public boolean isOpaqueCube() {
-				return false;
-			}
-		});
+		add(new BlockCollider(this).setOpaqueCube(false));
 
 		add(new StaticRenderer(this) {
 			@Override
@@ -58,13 +51,12 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 		add(new ItemRenderer(this));
 	}
 
-	@Override
-	public boolean onRightClick(Entity entity, int side, Vector3d hit) {
+	public boolean onRightClick(RightClickEvent evt) {
 		if (NetworkTarget.Side.get() == NetworkTarget.Side.SERVER) {
 			angle = (angle + Math.PI / 12) % (Math.PI * 2);
 			Game.instance.networkManager.sync(this);
 		}
-		world().addEntity(NovaTest.movableSimpleTestFactory).setPosition(entity.position());
+		world().addEntity(NovaTest.movableSimpleTestFactory).setPosition(evt.entity.transform.position());
 		return true;
 	}
 
