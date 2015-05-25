@@ -8,9 +8,7 @@ import nova.core.inventory.Inventory;
 import nova.core.inventory.InventorySimple;
 import nova.core.network.Packet;
 import nova.core.network.PacketHandler;
-import nova.core.render.texture.Texture;
 import nova.core.util.Category;
-import nova.core.util.Direction;
 import nova.sample.NovaTest;
 
 import java.util.Optional;
@@ -24,7 +22,11 @@ public class BlockSimpleTest extends Block implements PacketHandler, Category {
 	public Inventory inventory = new InventorySimple(1);
 
 	public BlockSimpleTest() {
-		add(new StaticBlockRenderer(this));
+		add(
+			new StaticBlockRenderer(this)
+				.setTexture((dir) -> Optional.of(NovaTest.steelTexture))
+		);
+
 		add(new ItemRenderer(this));
 
 		rightClickEvent.add(this::onRightClick);
@@ -36,11 +38,6 @@ public class BlockSimpleTest extends Block implements PacketHandler, Category {
 
 		System.out.println("Sending Packet: 1234");
 		Game.instance.networkManager.sync(this);
-	}
-
-	@Override
-	public Optional<Texture> getTexture(Direction side) {
-		return Optional.of(NovaTest.steelTexture);
 	}
 
 	@Override
