@@ -11,7 +11,7 @@ buildscript {
 			url = "https://oss.sonatype.org/content/repositories/snapshots/"
 		}
 		maven {
-			url 'http://maven.magik6k.net/'
+			url 'http://maven.novaapi.net/'
 		}
 	}
 	dependencies {
@@ -48,7 +48,7 @@ repositories {
 	mavenCentral()
 	mavenLocal()
 	maven {
-		url 'http://maven.magik6k.net/'
+		url 'http://maven.novaapi.net/'
 	}
 }
 
