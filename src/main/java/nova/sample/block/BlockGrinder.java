@@ -32,7 +32,7 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 
 	public BlockGrinder() {
 
-		add(new BlockCollider(this).setOpaqueCube(false));
+		add(new BlockCollider(this).isOpaqueCube(false));
 
 		add(new StaticRenderer(this) {
 			@Override
