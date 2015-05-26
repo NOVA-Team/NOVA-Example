@@ -29,7 +29,7 @@ public class ItemScrewdriver extends Item implements Category {
 
 	@Override
 	public String getID() {
-		return "screwdriver2";
+		return "testscrewdriver";
 	}
 
 	@Override
