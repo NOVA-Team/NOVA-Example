@@ -1,14 +1,15 @@
 package nova.sample.block;
 
 import nova.core.block.Block;
+import nova.core.block.component.BlockCollider;
 import nova.core.block.component.StaticBlockRenderer;
+import nova.core.component.Category;
 import nova.core.component.renderer.ItemRenderer;
 import nova.core.game.Game;
 import nova.core.inventory.Inventory;
 import nova.core.inventory.InventorySimple;
 import nova.core.network.Packet;
 import nova.core.network.PacketHandler;
-import nova.core.component.Category;
 import nova.sample.NovaTest;
 
 import java.util.Optional;
@@ -22,10 +23,9 @@ public class BlockSimpleTest extends Block implements PacketHandler {
 	public Inventory inventory = new InventorySimple(1);
 
 	public BlockSimpleTest() {
-		add(
-			new StaticBlockRenderer(this)
-				.setTexture((dir) -> Optional.of(NovaTest.steelTexture))
-		);
+		add(new StaticBlockRenderer(this)).setTexture((dir) -> Optional.of(NovaTest.steelTexture));
+
+		add(new BlockCollider(this));
 
 		add(new ItemRenderer(this));
 
