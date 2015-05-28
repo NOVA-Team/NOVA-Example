@@ -8,7 +8,7 @@ import nova.core.inventory.Inventory;
 import nova.core.inventory.InventorySimple;
 import nova.core.network.Packet;
 import nova.core.network.PacketHandler;
-import nova.core.util.Category;
+import nova.core.component.Category;
 import nova.sample.NovaTest;
 
 import java.util.Optional;
@@ -17,7 +17,7 @@ import java.util.Optional;
  * Literally, this is a test block.
  * @author Calclavia
  */
-public class BlockSimpleTest extends Block implements PacketHandler, Category {
+public class BlockSimpleTest extends Block implements PacketHandler {
 
 	public Inventory inventory = new InventorySimple(1);
 
@@ -29,6 +29,7 @@ public class BlockSimpleTest extends Block implements PacketHandler, Category {
 
 		add(new ItemRenderer(this));
 
+		add(new Category("buildingBlocks"));
 		rightClickEvent.add(this::onRightClick);
 	}
 
@@ -53,10 +54,5 @@ public class BlockSimpleTest extends Block implements PacketHandler, Category {
 	@Override
 	public String getID() {
 		return "simple";
-	}
-
-	@Override
-	public String getCategory() {
-		return "buildingBlocks";
 	}
 }

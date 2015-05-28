@@ -13,7 +13,7 @@ import nova.core.network.Sync;
 import nova.core.render.model.Model;
 import nova.core.retention.Storable;
 import nova.core.retention.Stored;
-import nova.core.util.Category;
+import nova.core.component.Category;
 import nova.core.util.transform.matrix.Quaternion;
 import nova.sample.NovaTest;
 
@@ -21,7 +21,7 @@ import nova.sample.NovaTest;
  * This is a test block that has state.
  * @author Calclavia
  */
-public class BlockGrinder extends Block implements Storable, Stateful, PacketHandler, Category {
+public class BlockGrinder extends Block implements Storable, Stateful, PacketHandler {
 
 	/**
 	 * Angle to rotate around
@@ -47,8 +47,8 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 					}
 				)
 		);
-
 		add(new ItemRenderer(this));
+		add(new Category("buildingBlocks"));
 	}
 
 	public boolean onRightClick(RightClickEvent evt) {
@@ -69,10 +69,5 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 	@Override
 	public String getID() {
 		return "stateful";
-	}
-
-	@Override
-	public String getCategory() {
-		return "buildingBlocks";
 	}
 }
