@@ -1,9 +1,9 @@
 package nova.sample.block;
 
 import nova.core.block.Block;
-import nova.core.block.component.BlockCollider;
 import nova.core.block.component.StaticBlockRenderer;
 import nova.core.component.Category;
+import nova.core.component.misc.Collider;
 import nova.core.component.renderer.ItemRenderer;
 import nova.core.game.Game;
 import nova.core.inventory.Inventory;
@@ -25,7 +25,7 @@ public class BlockSimpleTest extends Block implements PacketHandler {
 	public BlockSimpleTest() {
 		add(new StaticBlockRenderer(this)).setTexture((dir) -> Optional.of(NovaTest.steelTexture));
 
-		add(new BlockCollider(this));
+		add(new Collider());
 
 		add(new ItemRenderer(this));
 

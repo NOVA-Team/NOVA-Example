@@ -18,7 +18,7 @@ public class EntityMovableSimpleTest extends Entity implements Storable, Updater
 
 	public EntityMovableSimpleTest() {
 		add(new Collider())
-			.onEntityCollide(other -> excited = 1);
+			.onCollide(other -> excited = 1);
 	}
 
 	public void render(Model model) {

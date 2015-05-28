@@ -2,7 +2,8 @@ package nova.sample.block;
 
 import nova.core.block.Block;
 import nova.core.block.Stateful;
-import nova.core.block.component.BlockCollider;
+import nova.core.component.Category;
+import nova.core.component.misc.Collider;
 import nova.core.component.renderer.ItemRenderer;
 import nova.core.component.renderer.StaticRenderer;
 import nova.core.game.Game;
@@ -13,7 +14,6 @@ import nova.core.network.Sync;
 import nova.core.render.model.Model;
 import nova.core.retention.Storable;
 import nova.core.retention.Stored;
-import nova.core.component.Category;
 import nova.core.util.transform.matrix.Quaternion;
 import nova.sample.NovaTest;
 
@@ -32,7 +32,7 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 
 	public BlockGrinder() {
 
-		add(new BlockCollider(this).isOpaqueCube(false));
+		add(new Collider().isOpaqueCube(false));
 
 		add(new StaticRenderer(this)
 				.onRender(model -> {
