@@ -3,6 +3,8 @@ package nova.sample.block;
 import nova.core.block.Block;
 import nova.core.block.Stateful;
 import nova.core.component.Category;
+import nova.core.component.Component;
+import nova.core.component.Passthrough;
 import nova.core.component.misc.Collider;
 import nova.core.component.renderer.ItemRenderer;
 import nova.core.component.renderer.StaticRenderer;
@@ -49,6 +51,21 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 		);
 		add(new ItemRenderer(this));
 		add(new Category("buildingBlocks"));
+		add(new TestComponent());
+	}
+	
+	@Passthrough("nova.sample.block.BlockGrinder$TestInterface")
+	public static class TestComponent extends Component implements TestInterface {
+		
+		@Override
+		public void test() {
+			System.out.println("I do nothing");
+		}
+		
+	}
+	
+	public static interface TestInterface {
+		public void test();
 	}
 
 	public boolean onRightClick(RightClickEvent evt) {
