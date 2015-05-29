@@ -128,10 +128,4 @@ subprojects {
 		jvmArgs '-Dfml.coreMods.load=nova.wrapper.mc1710.NovaMinecraftCore'
 	}
 
-	idea {
-	project {
-		languageLevel = "1.8"
-	}
-}
-
 }
