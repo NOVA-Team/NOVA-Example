@@ -3,71 +3,135 @@ buildscript {
 		mavenCentral()
 		jcenter()
 		maven {
-			name = "forge"
-			url = "http://files.minecraftforge.net/maven"
+			name "forge"
+			url "http://files.minecraftforge.net/maven"
 		}
 		maven {
-			name = "sonatype"
-			url = "https://oss.sonatype.org/content/repositories/snapshots/"
+			name "sonatype"
+			url "https://oss.sonatype.org/content/repositories/snapshots/"
 		}
 		maven {
+			name "nova"
 			url 'http://maven.novaapi.net/'
 		}
+		maven { url 'http://maven.novaapi.net/' }
 	}
 	dependencies {
 		classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-//		classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.0'
 		classpath 'us.phildop:gradle-sublimetext-plugin:0.5.3'
 	}
 }
 
-apply plugin: 'java'
-apply plugin: 'forge'
-
-version = "0.1"
-group = "nova.sample"
-
-minecraft {
-	version = minecraft_version + "-" + forge_version
-	runDir = "run"
-}
-
-compileJava {
-	sourceCompatibility = '1.8'
-	targetCompatibility = '1.8'
-	options.encoding = 'UTF-8'
-	options.fork = true
-	options.compilerArgs << '-Xlint'
-}
-
-configurations.all {
-	resolutionStrategy.cacheChangingModulesFor 5, 'minutes'
-}
-
-repositories {
-	mavenCentral()
-	mavenLocal()
-	maven {
-		url 'http://maven.novaapi.net/'
+allprojects {
+	// Add all the repositories
+	buildscript {
+		repositories {
+			mavenCentral()
+			jcenter()
+			maven {
+				name "forge"
+				url "http://files.minecraftforge.net/maven"
+			}
+			maven {
+				name "sonatype"
+				url "https://oss.sonatype.org/content/repositories/snapshots/"
+			}
+			maven {
+				name "nova"
+				url 'http://maven.novaapi.net/'
+			}
+		}
 	}
+
+	// Basic ide plugin setup on every project
+	apply plugin: 'sublimeText'
+	apply plugin: 'eclipse'
+	apply plugin: 'idea'
+
+	sublimeText {
+		defaultFileExcludePatterns = ['.project', '.classpath', '.pydevproject']
+		defaultFolderExcludePatterns = ['.gradle', 'bin', 'build', '.settings']
+		generateSublimeJavaClasspath = true
+		generateSublimeJavaSrcpath = true
+		addGradleCompile = true
+	}
+
+	idea.project?.languageLevel = "1.8"
 }
 
-dependencies {
-    // The production code uses the SLF4J logging API at compile time
-	compile group: "nova.core", name: "NovaCore", version: nova_version, changing: true
+subprojects {
+	// Add plugins to classpath on every subproject
+	buildscript {
+		dependencies {
+			classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+			classpath 'us.phildop:gradle-sublimetext-plugin:0.5.3'
+//			classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.0'
+		}
+	}
 
-	runtime group: "nova.wrapper.mc1710", name: "NovaWrapper-MC1.7.10", version: wrapper_version, changing: true
-}
+	apply plugin: 'java'
+	apply plugin: 'forge'
 
-runClient {
-	jvmArgs '-Dfml.coreMods.load=nova.wrapper.mc1710.NovaMinecraftCore'
-}
-runServer {
-	jvmArgs '-Dfml.coreMods.load=nova.wrapper.mc1710.NovaMinecraftCore'
-}
+	// All needed repositories
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		maven {
+			url 'http://maven.novaapi.net/'
+		}
+	}
 
-idea {
+	configurations.all {
+		resolutionStrategy.cacheChangingModulesFor 5, 'minutes'
+	}
+
+
+	dependencies {
+		compile group: "nova.core", name: "NovaCore", version: nova_version, changing: true
+		runtime group: "nova.wrapper.mc1710", name: "NovaWrapper-MC1.7.10", version: wrapper_version, changing: true
+	}
+
+	compileJava {
+		sourceCompatibility = '1.8'
+		targetCompatibility = '1.8'
+		options.encoding = 'UTF-8'
+		options.fork = true
+		options.compilerArgs << '-Xlint'
+	}
+
+	// Artifacts needed for every project
+	task sourcesJar(type: Jar, dependsOn: classes) {
+		from sourceSets.main.allSource
+		classifier = 'sources'
+	}
+
+	task javadocJar(type: Jar, dependsOn: javadoc) {
+		from javadoc.destinationDir
+		classifier = 'javadoc'
+	}
+
+	artifacts {
+		archives sourcesJar
+		archives javadocJar
+	}
+
+	minecraft {
+		version = minecraft_version + "-" + forge_version
+		runDir = "run"
+	}
+
+	runClient {
+		jvmArgs '-Dfml.coreMods.load=nova.wrapper.mc1710.NovaMinecraftCore'
+	}
+
+	runServer {
+		jvmArgs '-Dfml.coreMods.load=nova.wrapper.mc1710.NovaMinecraftCore'
+	}
+
+	idea {
 	project {
 		languageLevel = "1.8"
 	}
+}
+
 }
