@@ -1,2 +1,8 @@
 rootProject.name = 'NovaExample'
+
 include 'old'
+
+include 'item'
+include 'block'
+include 'gui'
+

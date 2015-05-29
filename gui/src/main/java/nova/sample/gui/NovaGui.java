@@ -1,9 +1,7 @@
-package nova.sample;
+package nova.sample.gui;
 
 import nova.core.block.BlockFactory;
 import nova.core.block.BlockManager;
-import nova.core.entity.EntityFactory;
-import nova.core.entity.EntityManager;
 import nova.core.game.Game;
 import nova.core.gui.Background;
 import nova.core.gui.ComponentEvent.ActionEvent;
@@ -27,55 +25,37 @@ import nova.core.recipes.crafting.ItemIngredient;
 import nova.core.recipes.crafting.ShapedCraftingRecipe;
 import nova.core.render.Color;
 import nova.core.render.RenderManager;
-import nova.core.render.model.ModelProvider;
-import nova.core.render.model.TechneModel;
 import nova.core.render.texture.BlockTexture;
-import nova.core.render.texture.EntityTexture;
-import nova.core.render.texture.ItemTexture;
-import nova.sample.block.BlockGrinder;
-import nova.sample.block.BlockSimpleTest;
-import nova.sample.entity.EntityMovableSimpleTest;
-import nova.sample.item.ItemScrewdriver;
+import nova.sample.gui.block.BlockSimpleTest;
 
 /**
  * A test Nova Mod
  * 
  * @author Calclavia
  */
-@NovaMod(id = NovaTest.id, name = "Nova Test", version = "0.0.1", novaVersion = "0.0.1")
-public class NovaTest implements Loadable {
+@NovaMod(id = NovaGui.id, name = "Nova GUI example", version = "0.0.1", novaVersion = "0.0.1")
+public class NovaGui implements Loadable {
 
-	public static final String id = "novatest";
+	public static final String id = "novaguiexample";
 
-	public static BlockFactory blockTest, blockGrinder;
-	public static ItemFactory itemScrewdriver;
+	public static BlockFactory blockTest;
 	public static ItemFactory itemBlockTest;
-	public static ItemFactory itemBlockGrinder;
 
 	public static BlockTexture steelTexture;
-	public static ItemTexture screwTexture;
-	public static BlockTexture grinderTexture;
-	public static EntityTexture grinderEntityTexture;
-	public static ModelProvider grinderModel;
-
-	public static EntityFactory movableSimpleTestFactory;
-
 	public static GuiManager guiFactory;
 
 	public final BlockManager blockManager;
 	public final ItemManager itemManager;
 	public final RenderManager renderManager;
-	public final EntityManager entityManager;
 	public final NativeManager nativeManager;
 
-	public NovaTest(BlockManager blockManager, ItemManager itemManager, RenderManager renderManager, GuiManager guiFactory, EntityManager entityManager, NativeManager nativeManager) {
+	public NovaGui(BlockManager blockManager, ItemManager itemManager, RenderManager renderManager, GuiManager guiFactory, NativeManager nativeManager) {
 		this.blockManager = blockManager;
 		this.itemManager = itemManager;
 		this.renderManager = renderManager;
-		this.entityManager = entityManager;
 		this.nativeManager = nativeManager;
 
-		NovaTest.guiFactory = guiFactory;
+		NovaGui.guiFactory = guiFactory;
 	}
 
 	public static void initializeGUI() {
@@ -113,40 +93,18 @@ public class NovaTest implements Loadable {
 		);
 	}
 
-	public static void checkConversion(Object obj, String string) {
-		Object nativeObj = Game.instance.nativeManager.toNative(obj);
-		Object shouldBeObj = Game.instance.nativeManager.toNova(nativeObj);
-		if (shouldBeObj != obj)
-		{
-			System.out.println("NativeManager is not converting "+string+" properly, set a breakpoint in NovaTest.checkConversion");
-		}
-	}
-
 	@Override
 	public void preInit() {
 		blockTest = blockManager.register(BlockSimpleTest.class);
-		blockGrinder = blockManager.register(BlockGrinder.class);
 
-		itemScrewdriver = itemManager.register(ItemScrewdriver.class);
 		itemBlockTest = itemManager.getItemFromBlock(blockTest);
-		itemBlockGrinder = itemManager.getItemFromBlock(blockGrinder);
 
-		screwTexture = renderManager.registerTexture(new ItemTexture(id, "screwdriver"));
 		steelTexture = renderManager.registerTexture(new BlockTexture(id, "blockSteel"));
-		grinderTexture = renderManager.registerTexture(new BlockTexture(id, "grinder"));
-		grinderEntityTexture = renderManager.registerTexture(new EntityTexture(id, "grinderEntity"));
-		grinderModel = renderManager.registerModel(new TechneModel(id, "grinder"));
-
-		movableSimpleTestFactory = entityManager.register(EntityMovableSimpleTest.class);
 
 		// try to add a recipe
 		ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick"); //TODO: This should be obtained from some dictonary too
-		// ItemIngredient ingotIngredient =
-		// ItemIngredient.forItem("minecraft:iron_ingot");
 		ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
-		ItemIngredient screwdriverIngredient = ItemIngredient.forItem(itemScrewdriver.getID());
-		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemScrewdriver.makeItem(), "A- B", ingotIngredient, stickIngredient));
-		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockTest.makeItem(), "AAA-ABA-AAA", ingotIngredient, screwdriverIngredient));
+		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockTest.makeItem(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
 
 		initializeGUI();
 	}
