@@ -23,7 +23,7 @@ import nova.sample.NovaTest;
  * This is a test block that has state.
  * @author Calclavia
  */
-public class BlockGrinder extends Block implements Storable, Stateful, PacketHandler {
+public class BlockStateful extends Block implements Storable, Stateful, PacketHandler {
 
 	/**
 	 * Angle to rotate around
@@ -32,7 +32,7 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 	@Sync
 	private double angle = 0;
 
-	public BlockGrinder() {
+	public BlockStateful() {
 
 		add(new Collider().isOpaqueCube(false));
 
@@ -51,29 +51,17 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 		);
 		add(new ItemRenderer(this));
 		add(new Category("buildingBlocks"));
-		add(new TestComponent());
-	}
-	
-	@Passthrough("nova.sample.block.BlockGrinder$TestInterface")
-	public static class TestComponent extends Component implements TestInterface {
-		
-		@Override
-		public void test() {
-			System.out.println("I do nothing");
-		}
-		
-	}
-	
-	public static interface TestInterface {
-		public void test();
-	}
+		//add(new TestComponent());
 
+		rightClickEvent.add(this::onRightClick);
+	}
+	
 	public boolean onRightClick(RightClickEvent evt) {
-		if (NetworkTarget.Side.get() == NetworkTarget.Side.SERVER) {
+		if (NetworkTarget.Side.get().isServer()) {
 			angle = (angle + Math.PI / 12) % (Math.PI * 2);
 			Game.instance.networkManager.sync(this);
 		}
-		world().addEntity(NovaTest.movableSimpleTestFactory).transform().setPosition(evt.entity.position());
+		//world().addEntity(NovaTest.movableSimpleTestFactory).transform().setPosition(evt.entity.position());
 		return true;
 	}
 
@@ -86,5 +74,19 @@ public class BlockGrinder extends Block implements Storable, Stateful, PacketHan
 	@Override
 	public String getID() {
 		return "stateful";
+	}
+
+	public static interface TestInterface {
+		public void test();
+	}
+
+	@Passthrough("nova.sample.block.BlockGrinder$TestInterface")
+	public static class TestComponent extends Component implements TestInterface {
+
+		@Override
+		public void test() {
+			System.out.println("I do nothing");
+		}
+
 	}
 }

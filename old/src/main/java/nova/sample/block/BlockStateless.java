@@ -18,11 +18,11 @@ import java.util.Optional;
  * Literally, this is a test block.
  * @author Calclavia
  */
-public class BlockSimpleTest extends Block implements PacketHandler {
+public class BlockStateless extends Block implements PacketHandler {
 
 	public Inventory inventory = new InventorySimple(1);
 
-	public BlockSimpleTest() {
+	public BlockStateless() {
 		add(new StaticBlockRenderer(this)).setTexture((dir) -> Optional.of(NovaTest.steelTexture));
 
 		add(new Collider());
@@ -36,7 +36,6 @@ public class BlockSimpleTest extends Block implements PacketHandler {
 	public void onRightClick(RightClickEvent evt) {
 		NovaTest.initializeGUI();
 		NovaTest.guiFactory.showGui("testgui", evt.entity, position());
-
 		System.out.println("Sending Packet: 1234");
 		Game.instance.networkManager.sync(this);
 	}

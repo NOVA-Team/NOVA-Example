@@ -42,7 +42,7 @@ public class NovaBlock implements Loadable {
 
 	@Override
 	public void preInit() {
-		blockTest = blockManager.register(BlockSimpleTest.class);
+		blockTest = blockManager.register(BlockStateless.class);
 
 		itemBlockTest = itemManager.getItemFromBlock(blockTest);
 

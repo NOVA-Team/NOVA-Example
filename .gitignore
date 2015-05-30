@@ -6,6 +6,10 @@
 
 # Sources
 !/src
+!/block
+!/gui
+!/item
+!/old
 !/guidelines
 
 # github

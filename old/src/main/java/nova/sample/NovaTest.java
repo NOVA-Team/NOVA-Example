@@ -32,8 +32,8 @@ import nova.core.render.model.TechneModel;
 import nova.core.render.texture.BlockTexture;
 import nova.core.render.texture.EntityTexture;
 import nova.core.render.texture.ItemTexture;
-import nova.sample.block.BlockGrinder;
-import nova.sample.block.BlockSimpleTest;
+import nova.sample.block.BlockStateful;
+import nova.sample.block.BlockStateless;
 import nova.sample.entity.EntityMovableSimpleTest;
 import nova.sample.item.ItemScrewdriver;
 
@@ -103,7 +103,7 @@ public class NovaTest implements Loadable {
 			, Anchor.NORTH)
 
 			.onGuiEvent((event) -> {
-				event.gui.addInventory("main", ((BlockSimpleTest)event.block.get()).inventory);
+				event.gui.addInventory("main", ((BlockStateless) event.block.get()).inventory);
 				System.out.println("Test GUI initialized! " + event.player.getDisplayName() + " " + event.position);
 			}, BindEvent.class)
 
@@ -124,8 +124,8 @@ public class NovaTest implements Loadable {
 
 	@Override
 	public void preInit() {
-		blockTest = blockManager.register(BlockSimpleTest.class);
-		blockGrinder = blockManager.register(BlockGrinder.class);
+		blockTest = blockManager.register(BlockStateless.class);
+		blockGrinder = blockManager.register(BlockStateful.class);
 
 		itemScrewdriver = itemManager.register(ItemScrewdriver.class);
 		itemBlockTest = itemManager.getItemFromBlock(blockTest);
