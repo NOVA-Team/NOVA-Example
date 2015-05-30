@@ -37,7 +37,7 @@ public class BlockStateful extends Block implements Storable, Stateful, PacketHa
 		add(new Collider().isOpaqueCube(false));
 
 		add(new StaticRenderer(this)
-				.onRender(model -> {
+				.setOnRender(model -> {
 						Model grinderModel = NovaTest.grinderModel.getModel();
 
 						grinderModel
