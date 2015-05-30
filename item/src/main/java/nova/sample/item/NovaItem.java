@@ -35,6 +35,6 @@ public class NovaItem implements Loadable {
 
         ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick"); //TODO: This should be obtained from some dictonary too
         ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
-        Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemScrewdriver.makeItem(), "A- B", ingotIngredient, stickIngredient));
+        Game.instance().recipeManager().addRecipe(new ShapedCraftingRecipe(itemScrewdriver.makeItem(), "A- B", ingotIngredient, stickIngredient));
     }
 }
