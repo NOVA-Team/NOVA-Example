@@ -42,7 +42,7 @@ public class NovaBlock implements Loadable {
 
 	@Override
 	public void preInit() {
-		blockTest = blockManager.register(BlockStateless.class);
+		blockTest = blockManager.register(BlockSimpleTest.class);
 
 		itemBlockTest = itemManager.getItemFromBlock(blockTest);
 
@@ -52,6 +52,6 @@ public class NovaBlock implements Loadable {
 		ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick"); //TODO: This should be obtained from some dictonary too
 		ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
 
-		Game.instance.recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockTest.makeItem(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
+		Game.instance().recipeManager().addRecipe(new ShapedCraftingRecipe(itemBlockTest.makeItem(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
 	}
 }
