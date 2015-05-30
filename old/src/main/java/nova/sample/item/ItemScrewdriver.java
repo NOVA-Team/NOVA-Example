@@ -19,11 +19,7 @@ public class ItemScrewdriver extends Item {
 
 	public ItemScrewdriver() {
 		add(new Category("tools"));
-	}
-
-	@Override
-	public boolean onUse(Entity entity, World world, Vector3i position, Direction side, Vector3d hit) {
-		return true;
+		useEvent.add(event -> event.action = true);
 	}
 
 	@Override
