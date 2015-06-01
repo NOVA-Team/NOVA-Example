@@ -17,7 +17,6 @@ import nova.core.render.model.Model;
 import nova.core.retention.Storable;
 import nova.core.retention.Stored;
 import nova.core.util.transform.matrix.Quaternion;
-import nova.sample.NovaTest;
 
 /**
  * This is a test block that has state.
