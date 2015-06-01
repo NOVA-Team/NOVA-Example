@@ -23,8 +23,11 @@ public class NovaBlock implements Loadable {
 
 	public static final String id = "novablock";
 
-	public static BlockFactory blockTest;
-	public static ItemFactory itemBlockTest;
+	public static BlockFactory blockStateful;
+	public static BlockFactory blockStateless;
+
+	public static ItemFactory itemBlockStateful;
+	public static ItemFactory itemBlockStateless;
 
 	public static BlockTexture steelTexture;
 
@@ -42,9 +45,11 @@ public class NovaBlock implements Loadable {
 
 	@Override
 	public void preInit() {
-		blockTest = blockManager.register(BlockSimpleTest.class);
+		blockStateful = blockManager.register(BlockStateful.class);
+		blockStateless = blockManager.register(BlockStateless.class);
 
-		itemBlockTest = itemManager.getItemFromBlock(blockTest);
+		itemBlockStateful = itemManager.getItemFromBlock(blockStateful);
+		itemBlockStateless = itemManager.getItemFromBlock(blockStateless);
 
 		steelTexture = renderManager.registerTexture(new BlockTexture(id, "blockSteel"));
 
@@ -52,6 +57,6 @@ public class NovaBlock implements Loadable {
 		ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick"); //TODO: This should be obtained from some dictonary too
 		ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
 
-		Game.recipeManager().addRecipe(new ShapedCraftingRecipe(itemBlockTest.makeItem(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
+		Game.instance.recipeManager().addRecipe(new ShapedCraftingRecipe(itemBlockStateless.makeItem(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
 	}
 }
