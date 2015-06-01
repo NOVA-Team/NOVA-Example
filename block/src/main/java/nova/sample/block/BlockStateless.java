@@ -30,7 +30,7 @@ public class BlockStateless extends Block implements PacketHandler {
 
 	public void onRightClick(RightClickEvent evt) {
 		System.out.println("Sending Packet: 1234");
-		Game.networkManager().sync(this);
+		Game.network().sync(this);
 	}
 
 	@Override

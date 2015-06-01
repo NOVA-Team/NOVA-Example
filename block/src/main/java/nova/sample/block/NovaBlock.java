@@ -70,6 +70,6 @@ public class NovaBlock implements Loadable {
 		ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick"); //TODO: This should be obtained from some dictonary too
 		ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
 
-		Game.recipeManager().addRecipe(new ShapedCraftingRecipe(itemBlockStateless.makeItem(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
+		Game.recipes().addRecipe(new ShapedCraftingRecipe(itemBlockStateless.makeItem(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
 	}
 }
