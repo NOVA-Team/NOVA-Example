@@ -38,14 +38,14 @@ public class BlockStateful extends Block implements Storable, Stateful, PacketHa
 
 		add(new StaticRenderer(this)
 				.setOnRender(model -> {
-						Model grinderModel = NovaTest.grinderModel.getModel();
+						Model grinderModel = NovaBlock.grinderModel.getModel();
 
 						grinderModel
 							.combineChildren("crank", "crank1", "crank2", "crank3")
 							.rotate(Quaternion.fromEuler(0, angle, 0));
 
 						model.children.add(grinderModel);
-						model.bindAll(NovaTest.grinderTexture);
+						model.bindAll(NovaBlock.grinderTexture);
 					}
 				)
 		);

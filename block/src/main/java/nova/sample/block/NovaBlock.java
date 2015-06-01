@@ -11,7 +11,10 @@ import nova.core.nativewrapper.NativeManager;
 import nova.core.recipes.crafting.ItemIngredient;
 import nova.core.recipes.crafting.ShapedCraftingRecipe;
 import nova.core.render.RenderManager;
+import nova.core.render.model.ModelProvider;
+import nova.core.render.model.TechneModel;
 import nova.core.render.texture.BlockTexture;
+import nova.core.render.texture.EntityTexture;
 
 /**
  * A test Nova Mod
@@ -23,10 +26,18 @@ public class NovaBlock implements Loadable {
 
 	public static final String id = "novablock";
 
-	public static BlockFactory blockTest;
-	public static ItemFactory itemBlockTest;
+	public static BlockFactory blockStateful;
+	public static BlockFactory blockStateless;
+
+	public static ItemFactory itemBlockStateful;
+	public static ItemFactory itemBlockStateless;
 
 	public static BlockTexture steelTexture;
+	public static BlockTexture grinderTexture;
+
+	public static EntityTexture grinderEntityTexture;
+
+	public static ModelProvider grinderModel;
 
 	public final BlockManager blockManager;
 	public final ItemManager itemManager;
@@ -42,16 +53,23 @@ public class NovaBlock implements Loadable {
 
 	@Override
 	public void preInit() {
-		blockTest = blockManager.register(BlockSimpleTest.class);
+		blockStateful = blockManager.register(BlockStateful.class);
+		blockStateless = blockManager.register(BlockStateless.class);
 
-		itemBlockTest = itemManager.getItemFromBlock(blockTest);
+		itemBlockStateful = itemManager.getItemFromBlock(blockStateful);
+		itemBlockStateless = itemManager.getItemFromBlock(blockStateless);
 
 		steelTexture = renderManager.registerTexture(new BlockTexture(id, "blockSteel"));
+		grinderTexture = renderManager.registerTexture(new BlockTexture(id, "grinder"));
+
+		grinderEntityTexture = renderManager.registerTexture(new EntityTexture(id, "grinderEntity"));
+
+		grinderModel = renderManager.registerModel(new TechneModel(id, "grinder"));
 
 		// try to add a recipe
 		ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick"); //TODO: This should be obtained from some dictonary too
 		ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
 
-		Game.recipes().addRecipe(new ShapedCraftingRecipe(itemBlockTest.makeItem(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
+		Game.recipes().addRecipe(new ShapedCraftingRecipe(itemBlockStateless.makeItem(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
 	}
 }
