@@ -59,7 +59,7 @@ public class BlockStateful extends Block implements Storable, Stateful, PacketHa
 	public boolean onRightClick(RightClickEvent evt) {
 		if (NetworkTarget.Side.get().isServer()) {
 			angle = (angle + Math.PI / 12) % (Math.PI * 2);
-			Game.instance.networkManager.sync(this);
+			Game.networkManager().sync(this);
 		}
 		//world().addEntity(NovaTest.movableSimpleTestFactory).transform().setPosition(evt.entity.position());
 		return true;
