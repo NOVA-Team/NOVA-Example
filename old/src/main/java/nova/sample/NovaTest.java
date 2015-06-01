@@ -114,8 +114,8 @@ public class NovaTest implements Loadable {
 	}
 
 	public static void checkConversion(Object obj, String string) {
-		Object nativeObj = Game.nativeManager().toNative(obj);
-		Object shouldBeObj = Game.nativeManager().toNova(nativeObj);
+		Object nativeObj = Game.natives().toNative(obj);
+		Object shouldBeObj = Game.natives().toNova(nativeObj);
 		if (shouldBeObj != obj)
 		{
 			System.out.println("NativeManager is not converting "+string+" properly, set a breakpoint in NovaTest.checkConversion");
@@ -145,8 +145,8 @@ public class NovaTest implements Loadable {
 		// ItemIngredient.forItem("minecraft:iron_ingot");
 		ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
 		ItemIngredient screwdriverIngredient = ItemIngredient.forItem(itemScrewdriver.getID());
-		Game.recipeManager().addRecipe(new ShapedCraftingRecipe(itemScrewdriver.makeItem(), "A- B", ingotIngredient, stickIngredient));
-		Game.recipeManager().addRecipe(new ShapedCraftingRecipe(itemBlockTest.makeItem(), "AAA-ABA-AAA", ingotIngredient, screwdriverIngredient));
+		Game.recipes().addRecipe(new ShapedCraftingRecipe(itemScrewdriver.makeItem(), "A- B", ingotIngredient, stickIngredient));
+		Game.recipes().addRecipe(new ShapedCraftingRecipe(itemBlockTest.makeItem(), "AAA-ABA-AAA", ingotIngredient, screwdriverIngredient));
 
 		initializeGUI();
 	}
