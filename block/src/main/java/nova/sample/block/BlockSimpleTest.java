@@ -30,7 +30,7 @@ public class BlockSimpleTest extends Block implements PacketHandler {
 
 	public void onRightClick(RightClickEvent evt) {
 		System.out.println("Sending Packet: 1234");
-		Game.instance().networkManager().sync(this);
+		Game.networkManager().sync(this);
 	}
 
 	@Override
