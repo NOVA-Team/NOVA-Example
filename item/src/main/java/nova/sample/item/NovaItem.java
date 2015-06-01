@@ -15,7 +15,7 @@ import nova.core.render.texture.ItemTexture;
  */
 @NovaMod(id = NovaItem.id, name = "Nova Example Item", version = "0.0.1", novaVersion = "0.0.1")
 public class NovaItem implements Loadable {
-    public static final String id = "novaitemexample";
+    public static final String id = "novaitem";
 
     public static ItemFactory itemScrewdriver;
     public static ItemTexture screwTexture;

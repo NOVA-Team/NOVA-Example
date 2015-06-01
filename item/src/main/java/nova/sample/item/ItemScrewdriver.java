@@ -14,7 +14,7 @@ public class ItemScrewdriver extends Item {
 		add(new Category("tools"));
 		useEvent.add(event -> event.action = true);
 	}
-	
+
 	@Override
 	public Optional<ItemTexture> getTexture() {
 		return Optional.of(NovaItem.screwTexture);

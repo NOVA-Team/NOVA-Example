@@ -21,7 +21,7 @@ import nova.core.render.texture.BlockTexture;
 @NovaMod(id = NovaBlock.id, name = "Nova Example Block", version = "0.0.1", novaVersion = "0.0.1")
 public class NovaBlock implements Loadable {
 
-	public static final String id = "novablockexample";
+	public static final String id = "novablock";
 
 	public static BlockFactory blockTest;
 	public static ItemFactory itemBlockTest;
