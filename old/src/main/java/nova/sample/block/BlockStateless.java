@@ -37,7 +37,7 @@ public class BlockStateless extends Block implements PacketHandler {
 		NovaTest.initializeGUI();
 		NovaTest.guiFactory.showGui("testgui", evt.entity, position());
 		System.out.println("Sending Packet: 1234");
-		Game.instance.networkManager.sync(this);
+		Game.networkManager().sync(this);
 	}
 
 	@Override
