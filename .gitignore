@@ -30,6 +30,9 @@ build/
 *.iws
 *.ipr
 
+# other unwanted folders
+/*/run
+
 # checkstyle
 !/checkstyle*.xml
 
