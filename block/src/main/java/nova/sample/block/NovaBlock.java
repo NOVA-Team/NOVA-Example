@@ -2,7 +2,7 @@ package nova.sample.block;
 
 import nova.core.block.BlockFactory;
 import nova.core.block.BlockManager;
-import nova.core.game.Game;
+import nova.internal.Game;
 import nova.core.item.ItemFactory;
 import nova.core.item.ItemManager;
 import nova.core.loader.Loadable;
@@ -18,7 +18,7 @@ import nova.core.render.texture.EntityTexture;
 
 /**
  * A test Nova Mod
- * 
+ *
  * @author Calclavia
  */
 @NovaMod(id = NovaBlock.id, name = "Nova Example Block", version = "0.0.1", novaVersion = "0.0.1")

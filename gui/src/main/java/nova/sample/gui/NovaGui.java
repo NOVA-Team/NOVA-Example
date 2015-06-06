@@ -2,7 +2,7 @@ package nova.sample.gui;
 
 import nova.core.block.BlockFactory;
 import nova.core.block.BlockManager;
-import nova.core.game.Game;
+import nova.internal.Game;
 import nova.core.gui.Background;
 import nova.core.gui.ComponentEvent.ActionEvent;
 import nova.core.gui.Gui;
@@ -30,7 +30,7 @@ import nova.sample.gui.block.BlockSimpleTest;
 
 /**
  * A test Nova Mod
- * 
+ *
  * @author Calclavia
  */
 @NovaMod(id = NovaGui.id, name = "Nova GUI example", version = "0.0.1", novaVersion = "0.0.1")

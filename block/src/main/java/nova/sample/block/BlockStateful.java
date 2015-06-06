@@ -8,7 +8,7 @@ import nova.core.component.Passthrough;
 import nova.core.component.misc.Collider;
 import nova.core.component.renderer.ItemRenderer;
 import nova.core.component.renderer.StaticRenderer;
-import nova.core.game.Game;
+import nova.internal.Game;
 import nova.core.network.NetworkTarget;
 import nova.core.network.Packet;
 import nova.core.network.PacketHandler;
@@ -54,7 +54,7 @@ public class BlockStateful extends Block implements Storable, Stateful, PacketHa
 
 		rightClickEvent.add(this::onRightClick);
 	}
-	
+
 	public boolean onRightClick(RightClickEvent evt) {
 		if (NetworkTarget.Side.get().isServer()) {
 			angle = (angle + Math.PI / 12) % (Math.PI * 2);

@@ -1,6 +1,6 @@
 package nova.sample.item;
 
-import nova.core.game.Game;
+import nova.internal.Game;
 import nova.core.item.ItemFactory;
 import nova.core.item.ItemManager;
 import nova.core.loader.Loadable;

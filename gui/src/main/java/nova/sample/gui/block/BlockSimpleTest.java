@@ -5,7 +5,7 @@ import nova.core.block.component.StaticBlockRenderer;
 import nova.core.component.Category;
 import nova.core.component.misc.Collider;
 import nova.core.component.renderer.ItemRenderer;
-import nova.core.game.Game;
+import nova.internal.Game;
 import nova.core.inventory.Inventory;
 import nova.core.inventory.InventorySimple;
 import nova.core.network.Packet;
