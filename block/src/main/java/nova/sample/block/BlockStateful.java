@@ -78,7 +78,7 @@ public class BlockStateful extends Block implements Storable, Stateful, Syncable
 		public void test();
 	}
 
-	@Passthrough("nova.sample.block.BlockGrinder$TestInterface")
+	@Passthrough("nova.sample.block.BlockStateful$TestInterface")
 	public static class TestComponent extends Component implements TestInterface {
 
 		@Override
