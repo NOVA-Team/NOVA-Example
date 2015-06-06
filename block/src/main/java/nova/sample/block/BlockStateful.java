@@ -8,26 +8,25 @@ import nova.core.component.Passthrough;
 import nova.core.component.misc.Collider;
 import nova.core.component.renderer.ItemRenderer;
 import nova.core.component.renderer.StaticRenderer;
-import nova.internal.Game;
 import nova.core.network.NetworkTarget;
 import nova.core.network.Packet;
-import nova.core.network.PacketHandler;
+import nova.core.network.Syncable;
 import nova.core.network.Sync;
 import nova.core.render.model.Model;
 import nova.core.retention.Storable;
-import nova.core.retention.Stored;
+import nova.core.retention.Store;
 import nova.core.util.transform.matrix.Quaternion;
 
 /**
  * This is a test block that has state.
  * @author Calclavia
  */
-public class BlockStateful extends Block implements Storable, Stateful, PacketHandler {
+public class BlockStateful extends Block implements Storable, Stateful, Syncable {
 
 	/**
 	 * Angle to rotate around
 	 */
-	@Stored
+	@Store
 	@Sync
 	private double angle = 0;
 
@@ -58,7 +57,7 @@ public class BlockStateful extends Block implements Storable, Stateful, PacketHa
 	public boolean onRightClick(RightClickEvent evt) {
 		if (NetworkTarget.Side.get().isServer()) {
 			angle = (angle + Math.PI / 12) % (Math.PI * 2);
-			Game.network().sync(this);
+			NovaBlock.networkManager.sync(this);
 		}
 		//world().addEntity(NovaTest.movableSimpleTestFactory).transform().setPosition(evt.entity.position());
 		return true;
@@ -66,7 +65,7 @@ public class BlockStateful extends Block implements Storable, Stateful, PacketHa
 
 	@Override
 	public void read(Packet packet) {
-		PacketHandler.super.read(packet);
+		Syncable.super.read(packet);
 		world().markStaticRender(position());
 	}
 

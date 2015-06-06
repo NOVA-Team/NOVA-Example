@@ -5,11 +5,10 @@ import nova.core.block.component.StaticBlockRenderer;
 import nova.core.component.Category;
 import nova.core.component.misc.Collider;
 import nova.core.component.renderer.ItemRenderer;
-import nova.internal.Game;
+import nova.core.network.Syncable;
 import nova.core.inventory.Inventory;
 import nova.core.inventory.InventorySimple;
 import nova.core.network.Packet;
-import nova.core.network.PacketHandler;
 import nova.sample.gui.NovaGui;
 
 import java.util.Optional;
@@ -18,7 +17,7 @@ import java.util.Optional;
  * Literally, this is a test block.
  * @author Calclavia
  */
-public class BlockSimpleTest extends Block implements PacketHandler {
+public class BlockSimpleTest extends Block implements Syncable {
 
 	public Inventory inventory = new InventorySimple(1);
 
@@ -38,7 +37,7 @@ public class BlockSimpleTest extends Block implements PacketHandler {
 		NovaGui.guiFactory.showGui("testgui", evt.entity, position());
 
 		System.out.println("Sending Packet: 1234");
-		Game.network().sync(this);
+		NovaGui.networkManager.sync(this);
 	}
 
 	@Override
@@ -53,6 +52,6 @@ public class BlockSimpleTest extends Block implements PacketHandler {
 
 	@Override
 	public String getID() {
-		return "simple";
+		return "gui";
 	}
 }

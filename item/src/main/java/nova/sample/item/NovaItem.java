@@ -1,10 +1,11 @@
 package nova.sample.item;
 
-import nova.internal.Game;
 import nova.core.item.ItemFactory;
 import nova.core.item.ItemManager;
 import nova.core.loader.Loadable;
 import nova.core.loader.NovaMod;
+import nova.core.recipes.Recipe;
+import nova.core.recipes.RecipeManager;
 import nova.core.recipes.crafting.ItemIngredient;
 import nova.core.recipes.crafting.ShapedCraftingRecipe;
 import nova.core.render.RenderManager;
@@ -22,10 +23,12 @@ public class NovaItem implements Loadable {
 
     public final ItemManager itemManager;
     public final RenderManager renderManager;
+    public final RecipeManager recipeManager;
 
-    public NovaItem(ItemManager itemManager, RenderManager renderManager) {
+    public NovaItem(ItemManager itemManager, RenderManager renderManager, RecipeManager recipeManager) {
         this.itemManager = itemManager;
         this.renderManager = renderManager;
+        this.recipeManager = recipeManager;
     }
 
     @Override
@@ -35,6 +38,6 @@ public class NovaItem implements Loadable {
 
         ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick"); //TODO: This should be obtained from some dictonary too
         ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
-        Game.recipes().addRecipe(new ShapedCraftingRecipe(itemScrewdriver.makeItem(), "A- B", ingotIngredient, stickIngredient));
+        recipeManager.addRecipe(new ShapedCraftingRecipe(itemScrewdriver.makeItem(), "A- B", ingotIngredient, stickIngredient));
     }
 }

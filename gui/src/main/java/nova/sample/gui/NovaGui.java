@@ -2,7 +2,6 @@ package nova.sample.gui;
 
 import nova.core.block.BlockFactory;
 import nova.core.block.BlockManager;
-import nova.internal.Game;
 import nova.core.gui.Background;
 import nova.core.gui.ComponentEvent.ActionEvent;
 import nova.core.gui.Gui;
@@ -20,7 +19,9 @@ import nova.core.item.ItemManager;
 import nova.core.loader.Loadable;
 import nova.core.loader.NovaMod;
 import nova.core.nativewrapper.NativeManager;
+import nova.core.network.NetworkManager;
 import nova.core.network.NetworkTarget.Side;
+import nova.core.recipes.RecipeManager;
 import nova.core.recipes.crafting.ItemIngredient;
 import nova.core.recipes.crafting.ShapedCraftingRecipe;
 import nova.core.render.Color;
@@ -43,17 +44,28 @@ public class NovaGui implements Loadable {
 
 	public static BlockTexture steelTexture;
 	public static GuiManager guiFactory;
+	public static NetworkManager networkManager;
 
 	public final BlockManager blockManager;
 	public final ItemManager itemManager;
 	public final RenderManager renderManager;
 	public final NativeManager nativeManager;
+	public final RecipeManager recipeManager;
 
-	public NovaGui(BlockManager blockManager, ItemManager itemManager, RenderManager renderManager, GuiManager guiFactory, NativeManager nativeManager) {
+	public NovaGui(BlockManager blockManager,
+				   ItemManager itemManager,
+				   RenderManager renderManager,
+				   GuiManager guiFactory,
+				   NativeManager nativeManager,
+				   RecipeManager recipeManager,
+				   NetworkManager networkManager) {
 		this.blockManager = blockManager;
 		this.itemManager = itemManager;
 		this.renderManager = renderManager;
 		this.nativeManager = nativeManager;
+		this.recipeManager = recipeManager;
+
+		NovaGui.networkManager = networkManager;
 
 		NovaGui.guiFactory = guiFactory;
 	}
@@ -104,7 +116,7 @@ public class NovaGui implements Loadable {
 		// try to add a recipe
 		ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick"); //TODO: This should be obtained from some dictonary too
 		ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
-		Game.recipes().addRecipe(new ShapedCraftingRecipe(itemBlockTest.makeItem(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
+		recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockTest.makeItem(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
 
 		initializeGUI();
 	}
