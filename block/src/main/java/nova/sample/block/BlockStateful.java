@@ -40,7 +40,7 @@ public class BlockStateful extends Block implements Storable, Stateful, Syncable
 
 						grinderModel
 							.combineChildren("crank", "crank1", "crank2", "crank3")
-							.rotate(Quaternion.fromEuler(0, angle, 0));
+							.rotate(Quaternion.fromEuler(0, 0, angle));
 
 						model.children.add(grinderModel);
 						model.bindAll(NovaBlock.grinderTexture);
