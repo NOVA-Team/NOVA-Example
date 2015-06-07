@@ -87,7 +87,9 @@ subprojects {
 
 
 	dependencies {
-		compile group: "nova.core", name: "NovaCore", version: nova_version, changing: true
+		compile group: "nova.core", name: "NovaCore", version: nova_version, classifier: "api", changing: true
+
+		runtime group: "nova.core", name: "NovaCore", version: nova_version, changing: true
 		runtime group: "nova.wrapper.mc1710", name: "NovaWrapper-MC1.7.10", version: wrapper_version, changing: true
 	}
 
