@@ -15,7 +15,7 @@ import nova.core.network.Sync;
 import nova.core.render.model.Model;
 import nova.core.retention.Storable;
 import nova.core.retention.Store;
-import nova.core.util.transform.matrix.Quaternion;
+import nova.core.util.transform.matrix.Rotation;
 
 /**
  * This is a test block that has state.
@@ -40,7 +40,7 @@ public class BlockStateful extends Block implements Storable, Stateful, Syncable
 
 						grinderModel
 							.combineChildren("crank", "crank1", "crank2", "crank3")
-							.rotate(Quaternion.fromEuler(0, 0, angle));
+							.rotate(Rotation.fromEuler(0, 0, angle));
 
 						model.children.add(grinderModel);
 						model.bindAll(NovaBlock.grinderTexture);
