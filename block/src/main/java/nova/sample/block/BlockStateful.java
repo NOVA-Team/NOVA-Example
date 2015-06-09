@@ -15,7 +15,8 @@ import nova.core.network.Sync;
 import nova.core.render.model.Model;
 import nova.core.retention.Storable;
 import nova.core.retention.Store;
-org.apache.commons.math3.geometry.euclidean.threed.Rotation;
+import nova.core.util.math.RotationUtil;
+import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 
 /**
  * This is a test block that has state.
@@ -40,7 +41,7 @@ public class BlockStateful extends Block implements Storable, Stateful, Syncable
 
 						grinderModel
 							.combineChildren("crank", "crank1", "crank2", "crank3")
-							.rotate(new Rotation(RotationUtil.DEFAULT_ORDER,0, 0, angle));
+							.matrix.rotate(new Rotation(RotationUtil.DEFAULT_ORDER,0, 0, angle));
 
 						model.children.add(grinderModel);
 						model.bindAll(NovaBlock.grinderTexture);
