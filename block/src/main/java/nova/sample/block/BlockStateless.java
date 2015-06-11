@@ -5,10 +5,8 @@ import nova.core.block.component.StaticBlockRenderer;
 import nova.core.component.Category;
 import nova.core.component.misc.Collider;
 import nova.core.component.renderer.ItemRenderer;
-import nova.core.network.Syncable;
 import nova.core.network.Packet;
-
-import java.util.Optional;
+import nova.core.network.Syncable;
 
 /**
  * Literally, this is a test block.
@@ -17,7 +15,7 @@ import java.util.Optional;
 public class BlockStateless extends Block implements Syncable {
 
 	public BlockStateless() {
-		add(new StaticBlockRenderer(this)).setTexture((dir) -> Optional.of(NovaBlock.steelTexture));
+		add(new StaticBlockRenderer(this)).setTexture(NovaBlock.steelTexture);
 
 		add(new Collider());
 
