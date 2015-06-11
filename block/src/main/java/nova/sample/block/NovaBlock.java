@@ -25,63 +25,63 @@ import nova.core.render.texture.EntityTexture;
 @NovaMod(id = NovaBlock.id, name = "Nova Example Block", version = "0.0.1", novaVersion = "0.0.1")
 public class NovaBlock implements Loadable {
 
-    public static final String id = "novablock";
+	public static final String id = "novablock";
 
-    public static BlockFactory blockStateful;
-    public static BlockFactory blockStateless;
+	public static BlockFactory blockStateful;
+	public static BlockFactory blockStateless;
 
-    public static ItemFactory itemBlockStateful;
-    public static ItemFactory itemBlockStateless;
+	public static ItemFactory itemBlockStateful;
+	public static ItemFactory itemBlockStateless;
 
-    public static BlockTexture steelTexture;
-    public static BlockTexture grinderTexture;
+	public static BlockTexture steelTexture;
+	public static BlockTexture grinderTexture;
 
-    public static EntityTexture grinderEntityTexture;
+	public static EntityTexture grinderEntityTexture;
 
-    public static ModelProvider grinderModel;
+	public static ModelProvider grinderModel;
 
-    public static NetworkManager networkManager;
+	public static NetworkManager networkManager;
 
-    public final BlockManager blockManager;
-    public final ItemManager itemManager;
-    public final RenderManager renderManager;
-    public final NativeManager nativeManager;
-    public final RecipeManager recipeManager;
+	public final BlockManager blockManager;
+	public final ItemManager itemManager;
+	public final RenderManager renderManager;
+	public final NativeManager nativeManager;
+	public final RecipeManager recipeManager;
 
-    public NovaBlock(BlockManager blockManager,
-                     ItemManager itemManager,
-                     RenderManager renderManager,
-                     NativeManager nativeManager,
-                     NetworkManager networkManager,
-                     RecipeManager recipeManager) {
-        this.blockManager = blockManager;
-        this.itemManager = itemManager;
-        this.renderManager = renderManager;
-        this.nativeManager = nativeManager;
-        this.recipeManager = recipeManager;
+	public NovaBlock(BlockManager blockManager,
+					 ItemManager itemManager,
+					 RenderManager renderManager,
+					 NativeManager nativeManager,
+					 NetworkManager networkManager,
+					 RecipeManager recipeManager) {
+		this.blockManager = blockManager;
+		this.itemManager = itemManager;
+		this.renderManager = renderManager;
+		this.nativeManager = nativeManager;
+		this.recipeManager = recipeManager;
 
-        NovaBlock.networkManager = networkManager;
-    }
+		NovaBlock.networkManager = networkManager;
+	}
 
-    @Override
-    public void preInit() {
-        blockStateful = blockManager.register(BlockStateful.class);
-        blockStateless = blockManager.register(BlockStateless.class);
+	@Override
+	public void preInit() {
+		steelTexture = renderManager.registerTexture(new BlockTexture(id, "blockSteel"));
+		grinderTexture = renderManager.registerTexture(new BlockTexture(id, "grinder"));
 
-        itemBlockStateful = itemManager.getItemFromBlock(blockStateful);
-        itemBlockStateless = itemManager.getItemFromBlock(blockStateless);
+		blockStateful = blockManager.register(BlockStateful.class);
+		blockStateless = blockManager.register(BlockStateless.class);
 
-        steelTexture = renderManager.registerTexture(new BlockTexture(id, "blockSteel"));
-        grinderTexture = renderManager.registerTexture(new BlockTexture(id, "grinder"));
+		itemBlockStateful = itemManager.getItemFromBlock(blockStateful);
+		itemBlockStateless = itemManager.getItemFromBlock(blockStateless);
 
-        grinderEntityTexture = renderManager.registerTexture(new EntityTexture(id, "grinderEntity"));
+		grinderEntityTexture = renderManager.registerTexture(new EntityTexture(id, "grinderEntity"));
 
-        grinderModel = renderManager.registerModel(new TechneModel(id, "grinder"));
+		grinderModel = renderManager.registerModel(new TechneModel(id, "grinder"));
 
-        // try to add a recipe
-        ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick"); //TODO: This should be obtained from some dictonary too
-        ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
+		// try to add a recipe
+		ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick"); //TODO: This should be obtained from some dictonary too
+		ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
 
-        recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockStateless.makeItem(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
-    }
+		recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockStateless.makeItem(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
+	}
 }
