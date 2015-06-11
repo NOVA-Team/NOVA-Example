@@ -24,7 +24,7 @@ public class BlockStateless extends Block implements Syncable {
 		add(new ItemRenderer(this));
 
 		add(new Category("buildingBlocks"));
-		rightClickEvent.add(this::onRightClick);
+		events.on(RightClickEvent.class).bind(this::onRightClick);
 	}
 
 	public void onRightClick(RightClickEvent evt) {

@@ -52,7 +52,7 @@ public class BlockStateful extends Block implements Storable, Stateful, Syncable
 		add(new Category("buildingBlocks"));
 		//add(new TestComponent());
 
-		rightClickEvent.add(this::onRightClick);
+		events.on(RightClickEvent.class).bind(this::onRightClick);
 	}
 
 	public boolean onRightClick(RightClickEvent evt) {

@@ -12,7 +12,7 @@ public class ItemScrewdriver extends Item {
 
 	public ItemScrewdriver() {
 		add(new Category("tools"));
-		useEvent.add(event -> event.action = true);
+		events.on(UseEvent.class).bind(event -> event.action = true);
 	}
 
 	@Override
