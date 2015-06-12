@@ -1,9 +1,8 @@
 package nova.sample.item;
 
 import nova.core.component.Category;
+import nova.core.component.renderer.ItemRenderer;
 import nova.core.item.Item;
-import nova.core.render.texture.ItemTexture;
-import java.util.Optional;
 
 /**
  * @author Calclavia
@@ -12,12 +11,10 @@ public class ItemScrewdriver extends Item {
 
 	public ItemScrewdriver() {
 		add(new Category("tools"));
-		events.on(UseEvent.class).bind(event -> event.action = true);
-	}
+		add(new ItemRenderer())
+			.setTexture(NovaItem.screwTexture);
 
-	@Override
-	public Optional<ItemTexture> getTexture() {
-		return Optional.of(NovaItem.screwTexture);
+		events.on(UseEvent.class).bind(event -> event.action = true);
 	}
 
 	@Override
