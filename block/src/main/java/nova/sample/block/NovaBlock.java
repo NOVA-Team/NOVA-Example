@@ -45,19 +45,16 @@ public class NovaBlock implements Loadable {
 	public final BlockManager blockManager;
 	public final ItemManager itemManager;
 	public final RenderManager renderManager;
-	public final NativeManager nativeManager;
 	public final RecipeManager recipeManager;
 
 	public NovaBlock(BlockManager blockManager,
 					 ItemManager itemManager,
 					 RenderManager renderManager,
-					 NativeManager nativeManager,
 					 NetworkManager networkManager,
 					 RecipeManager recipeManager) {
 		this.blockManager = blockManager;
 		this.itemManager = itemManager;
 		this.renderManager = renderManager;
-		this.nativeManager = nativeManager;
 		this.recipeManager = recipeManager;
 
 		NovaBlock.networkManager = networkManager;

@@ -49,20 +49,17 @@ public class NovaGui implements Loadable {
 	public final BlockManager blockManager;
 	public final ItemManager itemManager;
 	public final RenderManager renderManager;
-	public final NativeManager nativeManager;
 	public final RecipeManager recipeManager;
 
 	public NovaGui(BlockManager blockManager,
 				   ItemManager itemManager,
 				   RenderManager renderManager,
 				   GuiManager guiFactory,
-				   NativeManager nativeManager,
 				   RecipeManager recipeManager,
 				   NetworkManager networkManager) {
 		this.blockManager = blockManager;
 		this.itemManager = itemManager;
 		this.renderManager = renderManager;
-		this.nativeManager = nativeManager;
 		this.recipeManager = recipeManager;
 
 		NovaGui.networkManager = networkManager;
