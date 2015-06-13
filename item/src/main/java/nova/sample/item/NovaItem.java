@@ -33,8 +33,8 @@ public class NovaItem implements Loadable {
 
     @Override
     public void preInit() {
+		screwTexture = renderManager.registerTexture(new ItemTexture(id, "screwdriver"));
         itemScrewdriver = itemManager.register(ItemScrewdriver.class);
-        screwTexture = renderManager.registerTexture(new ItemTexture(id, "screwdriver"));
 
         ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick"); //TODO: This should be obtained from some dictonary too
         ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
