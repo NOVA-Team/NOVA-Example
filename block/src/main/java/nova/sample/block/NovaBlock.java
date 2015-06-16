@@ -13,7 +13,7 @@ import nova.core.recipes.crafting.ItemIngredient;
 import nova.core.recipes.crafting.ShapedCraftingRecipe;
 import nova.core.render.RenderManager;
 import nova.core.render.model.ModelProvider;
-import nova.core.render.model.TechneModel;
+import nova.core.render.model.TechneModelProvider;
 import nova.core.render.texture.BlockTexture;
 import nova.core.render.texture.EntityTexture;
 
@@ -73,7 +73,7 @@ public class NovaBlock implements Loadable {
 
 		grinderEntityTexture = renderManager.registerTexture(new EntityTexture(id, "grinderEntity"));
 
-		grinderModel = renderManager.registerModel(new TechneModel(id, "grinder"));
+		grinderModel = renderManager.registerModel(new TechneModelProvider(id, "grinder"));
 
 		// try to add a recipe
 		ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick"); //TODO: This should be obtained from some dictonary too
