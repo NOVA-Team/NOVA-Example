@@ -2,5 +2,5 @@
 # @author Calclavia
 
 # Blocks
-tile.stateful.name=Stateful Block
-tile.stateless.name=Stateless Block
+block.stateful.name=Stateful Block 
+block.simple.name=Stateless Block
