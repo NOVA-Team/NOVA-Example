@@ -33,7 +33,7 @@ public class BlockStateful extends Block implements Storable, Stateful, Syncable
 
 	public BlockStateful() {
 
-		add(new Collider().isOpaqueCube(false));
+		add(new Collider(this).isOpaqueCube(false));
 
 		add(new StaticRenderer(this)
 				.setOnRender(model -> {

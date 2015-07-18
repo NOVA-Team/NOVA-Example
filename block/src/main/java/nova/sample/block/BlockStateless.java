@@ -17,7 +17,7 @@ public class BlockStateless extends Block implements Syncable {
 	public BlockStateless() {
 		add(new StaticBlockRenderer(this)).setTexture(NovaBlock.steelTexture);
 
-		add(new Collider());
+		add(new Collider(this));
 
 		add(new ItemRenderer(this));
 

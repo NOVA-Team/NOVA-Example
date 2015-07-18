@@ -24,7 +24,7 @@ public class BlockSimpleTest extends Block implements Syncable {
 	public BlockSimpleTest() {
 		add(new StaticBlockRenderer(this)).setTexture((dir) -> Optional.of(NovaGui.steelTexture));
 
-		add(new Collider());
+		add(new Collider(this));
 
 		add(new ItemRenderer(this));
 
