@@ -1,2 +1,6 @@
 version = "0.1"
 group = "nova.sample.gui"
+
+dependencies {
+	compile "nova.gui:NOVA-GUI:0.0.1-SNAPSHOT"
+}
