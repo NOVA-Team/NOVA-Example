@@ -1,0 +1,6 @@
+version = "0.1"
+group = "nova.sample.worldgen"
+
+dependencies {
+	compile "nova.worldgen:NOVA-Worldgen:0.0.1-SNAPSHOT"
+}
