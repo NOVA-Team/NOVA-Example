@@ -5,8 +5,7 @@ import nova.core.block.BlockManager;
 import nova.core.item.ItemFactory;
 import nova.core.item.ItemManager;
 import nova.core.loader.Loadable;
-import nova.core.loader.NovaMod;
-import nova.core.nativewrapper.NativeManager;
+import nova.core.loader.Mod;
 import nova.core.network.NetworkManager;
 import nova.core.recipes.RecipeManager;
 import nova.core.recipes.crafting.ItemIngredient;
@@ -22,10 +21,10 @@ import nova.core.render.texture.EntityTexture;
  *
  * @author Calclavia
  */
-@NovaMod(id = NovaBlock.id, name = "Nova Example Block", version = "0.0.1", novaVersion = "0.0.1")
+@Mod(id = NovaBlock.MOD_ID, name = "Nova Example Block", version = "0.0.1", novaVersion = "0.0.1")
 public class NovaBlock implements Loadable {
 
-	public static final String id = "novablock";
+	public static final String MOD_ID = "novablock";
 
 	public static BlockFactory blockStateful;
 	public static BlockFactory blockStateless;
@@ -48,10 +47,10 @@ public class NovaBlock implements Loadable {
 	public final RecipeManager recipeManager;
 
 	public NovaBlock(BlockManager blockManager,
-					 ItemManager itemManager,
-					 RenderManager renderManager,
-					 NetworkManager networkManager,
-					 RecipeManager recipeManager) {
+	                 ItemManager itemManager,
+	                 RenderManager renderManager,
+	                 NetworkManager networkManager,
+	                 RecipeManager recipeManager) {
 		this.blockManager = blockManager;
 		this.itemManager = itemManager;
 		this.renderManager = renderManager;
@@ -62,23 +61,23 @@ public class NovaBlock implements Loadable {
 
 	@Override
 	public void preInit() {
-		steelTexture = renderManager.registerTexture(new BlockTexture(id, "blockSteel"));
-		grinderTexture = renderManager.registerTexture(new BlockTexture(id, "grinder"));
+		steelTexture = renderManager.registerTexture(new BlockTexture(MOD_ID, "block_steel"));
+		grinderTexture = renderManager.registerTexture(new BlockTexture(MOD_ID, "grinder"));
 
-		blockStateful = blockManager.register(BlockStateful.class);
-		blockStateless = blockManager.register(BlockStateless.class);
+		blockStateful = blockManager.register(MOD_ID + ":stateful", BlockStateful::new);
+		blockStateless = blockManager.register(MOD_ID + ":simple", BlockStateless::new);
 
 		itemBlockStateful = itemManager.getItemFromBlock(blockStateful);
 		itemBlockStateless = itemManager.getItemFromBlock(blockStateless);
 
-		grinderEntityTexture = renderManager.registerTexture(new EntityTexture(id, "grinderEntity"));
-
-		grinderModel = renderManager.registerModel(new TechneModelProvider(id, "grinder"));
+		grinderEntityTexture = renderManager.registerTexture(new EntityTexture(MOD_ID, "grinder_entity"));
+		grinderModel = renderManager.registerModel(new TechneModelProvider(MOD_ID, "grinder"));
 
 		// try to add a recipe
-		ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick"); //TODO: This should be obtained from some dictonary too
+		//ItemIngredient stickIngredient = ItemIngredient.forItem("minecraft:stick"); //TODO: This should be obtained from some dictonary too
+		ItemIngredient stickIngredient = ItemIngredient.forDictionary("stickWood");
 		ItemIngredient ingotIngredient = ItemIngredient.forDictionary("ingotIron");
 
-		recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockStateless.makeItem(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
+		recipeManager.addRecipe(new ShapedCraftingRecipe(itemBlockStateless.build(), "AAA-ABA-AAA", ingotIngredient, stickIngredient));
 	}
 }

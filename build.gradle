@@ -1,8 +1,7 @@
 plugins {
 	id "java"
-	id "nova.gradle" version "0.2.4"
+	id "nova.gradle" version "0.2.6"
 }
-
 
 subprojects {
 	apply plugin: "java"
@@ -23,12 +22,11 @@ subprojects {
 	nova {
 		wrappers {
 			"17" {
-				wrapper "nova.wrapper.mc1710:NovaWrapper-MC1.7.10:0.1-SNAPSHOT"
+				wrapper "nova.core:NOVA-Core-Wrapper-MC1.7:$nova_version"
 			}
 			"18" {
-				wrapper "nova.wrapper.mc18:NovaWrapper-MC1.8:0.1-SNAPSHOT"
+				wrapper "nova.core:NOVA-Core-Wrapper-MC1.8:$nova_version"
 			}
 		}
 	}
-
 }

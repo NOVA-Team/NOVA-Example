@@ -1,12 +1,12 @@
 package nova.sample.block;
 
 import nova.core.block.Block;
-import nova.core.block.component.StaticBlockRenderer;
 import nova.core.component.Category;
 import nova.core.component.misc.Collider;
-import nova.core.component.renderer.ItemRenderer;
+import nova.core.component.renderer.StaticRenderer;
 import nova.core.network.Packet;
 import nova.core.network.Syncable;
+import nova.core.render.pipeline.BlockRenderPipeline;
 
 /**
  * Literally, this is a test block.
@@ -15,13 +15,10 @@ import nova.core.network.Syncable;
 public class BlockStateless extends Block implements Syncable {
 
 	public BlockStateless() {
-		add(new StaticBlockRenderer(this)).setTexture(NovaBlock.steelTexture);
+		components.add(new StaticRenderer().onRender(new BlockRenderPipeline(this).withTexture(NovaBlock.steelTexture).build()));
+		components.add(new Collider(this));
+		components.add(new Category("buildingBlocks"));
 
-		add(new Collider(this));
-
-		add(new ItemRenderer(this));
-
-		add(new Category("buildingBlocks"));
 		events.on(RightClickEvent.class).bind(this::onRightClick);
 	}
 
@@ -38,10 +35,5 @@ public class BlockStateless extends Block implements Syncable {
 	@Override
 	public void write(Packet packet) {
 		packet.writeInt(1234);
-	}
-
-	@Override
-	public String getID() {
-		return "simple";
 	}
 }
