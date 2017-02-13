@@ -1,4 +1,4 @@
-rootProject.name = 'NovaExample'
+rootProject.name = 'NOVA-Example'
 
 include 'block'
 include 'entity'

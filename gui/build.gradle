@@ -1,6 +1,8 @@
-version = "0.1"
+version = "0.1.0-SNAPSHOT"
 group = "nova.sample.gui"
 
+archivesBaseName = "NOVA-Example-GUI"
+
 dependencies {
-	compile "nova.gui:NOVA-GUI:0.0.1-SNAPSHOT"
+	compile group: "nova.gui", name: "NOVA-GUI", version: "0.0.1-SNAPSHOT", changing: true
 }

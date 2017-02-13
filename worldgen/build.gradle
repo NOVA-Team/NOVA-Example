@@ -1,6 +1,8 @@
-version = "0.1"
+version = "0.1.0-SNAPSHOT"
 group = "nova.sample.worldgen"
 
+archivesBaseName = "NOVA-Example-Worldgen"
+
 dependencies {
-	compile "nova.worldgen:NOVA-Worldgen:0.0.1-SNAPSHOT"
+	compile group: "nova.worldgen", name: "NOVA-Worldgen", version: "0.0.1-SNAPSHOT", changing: true
 }

@@ -6,12 +6,12 @@ import nova.core.component.Category;
 import nova.core.component.Component;
 import nova.core.component.Passthrough;
 import nova.core.component.misc.Collider;
-import nova.core.component.renderer.ItemRenderer;
 import nova.core.component.renderer.StaticRenderer;
 import nova.core.network.NetworkTarget;
 import nova.core.network.Packet;
 import nova.core.network.Syncable;
 import nova.core.network.Sync;
+import nova.core.render.model.MeshModel;
 import nova.core.render.model.Model;
 import nova.core.retention.Storable;
 import nova.core.retention.Store;
@@ -32,25 +32,21 @@ public class BlockStateful extends Block implements Storable, Stateful, Syncable
 	private double angle = 0;
 
 	public BlockStateful() {
+		components.add(new Collider(this).isOpaqueCube(false));
+		components.add(new StaticRenderer().onRender(model -> {
+			Model grinderModel = NovaBlock.grinderModel.getModel();
 
-		add(new Collider(this).isOpaqueCube(false));
+			grinderModel
+				.combineChildren("crank", "crank1", "crank2", "crank3")
+				.matrix.rotate(new Rotation(RotationUtil.DEFAULT_ORDER, 0, 0, angle));
 
-		add(new StaticRenderer(this)
-				.setOnRender(model -> {
-						Model grinderModel = NovaBlock.grinderModel.getModel();
+			if (grinderModel instanceof MeshModel)
+				((MeshModel)grinderModel).bindAll(NovaBlock.grinderTexture);
 
-						grinderModel
-							.combineChildren("crank", "crank1", "crank2", "crank3")
-							.matrix.rotate(new Rotation(RotationUtil.DEFAULT_ORDER,0, 0, angle));
-
-						model.children.add(grinderModel);
-						model.bindAll(NovaBlock.grinderTexture);
-					}
-				)
-		);
-		add(new ItemRenderer(this));
-		add(new Category("buildingBlocks"));
-		//add(new TestComponent());
+			model.children.add(grinderModel);
+		}));
+		components.add(new Category("buildingBlocks"));
+		//components.add(new TestComponent());
 
 		events.on(RightClickEvent.class).bind(this::onRightClick);
 	}
@@ -68,11 +64,6 @@ public class BlockStateful extends Block implements Storable, Stateful, Syncable
 	public void read(Packet packet) {
 		Syncable.super.read(packet);
 		world().markStaticRender(position());
-	}
-
-	@Override
-	public String getID() {
-		return "stateful";
 	}
 
 	public static interface TestInterface {

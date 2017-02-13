@@ -9,6 +9,8 @@
 !/block
 !/gui
 !/item
+!/entity
+!/worldgen
 !/old
 !/guidelines
 
