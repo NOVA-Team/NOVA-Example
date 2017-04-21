@@ -2,5 +2,5 @@
 # @author Calclavia
 
 # Blocks
-block.stateful.name=Stateful Block 
-block.simple.name=Stateless Block
+block.novablock.stateful.name=Stateful Block
+block.novablock.simple.name=Stateless Block

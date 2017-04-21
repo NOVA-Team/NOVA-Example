@@ -1,3 +1,4 @@
+
 package nova.sample.item;
 
 import nova.core.component.Category;

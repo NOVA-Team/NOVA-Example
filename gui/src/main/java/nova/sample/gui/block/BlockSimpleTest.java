@@ -29,7 +29,6 @@ public class BlockSimpleTest extends Block implements Syncable {
 	}
 
 	public void onRightClick(RightClickEvent evt) {
-		NovaGui.initializeGUI();
 		NovaGui.guiFactory.showGui("testgui", evt.entity, position());
 
 		System.out.println("Sending Packet: 1234");
@@ -38,7 +37,7 @@ public class BlockSimpleTest extends Block implements Syncable {
 
 	@Override
 	public void read(Packet packet) {
-		System.out.println("Received packet: " + packet.readInt());
+		NovaGui.logger.info("Received packet: {}", packet.readInt());
 	}
 
 	@Override

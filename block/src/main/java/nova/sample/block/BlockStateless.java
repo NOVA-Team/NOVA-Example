@@ -23,13 +23,13 @@ public class BlockStateless extends Block implements Syncable {
 	}
 
 	public void onRightClick(RightClickEvent evt) {
-		System.out.println("Sending Packet: 1234");
+		NovaBlock.logger.info("Sending Packet: 1234");
 		NovaBlock.networkManager.sync(this);
 	}
 
 	@Override
 	public void read(Packet packet) {
-		System.out.println("Received packet: " + packet.readInt());
+		NovaBlock.logger.info("Received packet: " + packet.readInt());
 	}
 
 	@Override

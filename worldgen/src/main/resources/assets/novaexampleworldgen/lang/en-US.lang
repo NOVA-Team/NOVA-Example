@@ -1,0 +1,8 @@
+# NOVA Test Language File
+# @author Calclavia
+
+# Blocks
+block.novaexampleworldgen.steel_ore.name=Steel Ore
+
+# Items
+item.novaexampleworldgen.steel_ingot.name=Steel Ingot
